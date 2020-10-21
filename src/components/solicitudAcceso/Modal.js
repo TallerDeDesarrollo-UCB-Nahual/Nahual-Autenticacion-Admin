@@ -1,31 +1,30 @@
-import React, { Component, Fragment } from 'react';
-import { Button, Image, Modal, Grid, GridRow, Icon, Header, Segment, Loader, Dimmer } from 'semantic-ui-react';
-import '../../../public/stylesheets/Modal.css';
-import axios from "axios";
+import React, { Component } from 'react';
+import { Button, Modal, Header } from 'semantic-ui-react';
+import FormularioDeSolicitud from './FormularioDeSolicitud'
 
-class ModalExampleModal extends Component {
+class ModalExample extends Component {
   constructor() {
     super();
     this.state = {
-      open: false
+      open: true
     };
   }
 
-  obtenerEgresadeDeAPI() {
-    const API_URL = `http://fathomless-falls-62194.herokuapp.com/api/estudiantes/`;
-    axios
-      .get(`${API_URL}${this.props.egresadeId}`)
-      .then(response => {
-        this.setState({
-          egresade: response.data.response
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+//   obtenerEgresadeDeAPI() {
+//     const API_URL = `http://fathomless-falls-62194.herokuapp.com/api/estudiantes/`;
+//     axios
+//       .get(`${API_URL}${this.props.egresadeId}`)
+//       .then(response => {
+//         this.setState({
+//           egresade: response.data.response
+//         });
+//       })
+//       .catch(function (error) {
+//         console.log(error);
+//       });
+//   }
 
-  abrirModal(estado) {
+  setOpen(estado) {
     this.setState({
       open: estado
     });
@@ -34,38 +33,22 @@ class ModalExampleModal extends Component {
   render() {
     return (
         <Modal
-        onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
-        open={open}
+        onClose={() => this.setOpen(false)}
+        onOpen={() => this.setOpen(true)}
+        open={this.state.open}
         size={"small"}
+
         trigger={<Button>Show Modal</Button>}
       >
-        <Modal.Header>Select a Photo</Modal.Header>
-        <Modal.Content image>
-          <Modal.Description>
-            <Header>Default Profile Image</Header>
-            <p>
-              We've found the following gravatar image associated with your e-mail
-              address.
-            </p>
-            <p>Is it okay to use this photo?</p>
-          </Modal.Description>
+        <Modal.Header>Formulario de soliciut de ingreso</Modal.Header>
+
+        <Modal.Content>
+        <FormularioDeSolicitud />
         </Modal.Content>
-        <Modal.Actions>
-          <Button color='black' onClick={() => setOpen(false)}>
-            Nope
-          </Button>
-          <Button
-            content="Yep, that's me"
-            labelPosition='right'
-            icon='checkmark'
-            onClick={() => setOpen(false)}
-            positive
-          />
-        </Modal.Actions>
+        
       </Modal>
     )
   }
 }
 
-export default ModalExampleModal
+export default ModalExample
