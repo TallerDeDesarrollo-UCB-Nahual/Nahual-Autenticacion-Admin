@@ -65,7 +65,7 @@ export default class EditarEgresades extends Component {
                     value = {this.state.motivo}
                     onChange={this.onChangeInput}
                 />
-                <Button>Confirmar</Button>
+                <Button className="boton_confirm" onClick={() => window.location = "http://localhost:3000/"}>Confirmar</Button>
             </Form>
         )
     }
