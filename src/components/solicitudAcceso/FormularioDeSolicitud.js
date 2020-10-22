@@ -3,7 +3,6 @@ import {Button } from 'semantic-ui-react'
 import {Form, Input, TextArea, Field } from 'semantic-ui-react-form-validator';
 import '../../public/Stylesheets/FormularioDeSolicitud.css'
 
-
 export default class EditarEgresades extends Component {
 
     constructor(){
