@@ -40,7 +40,7 @@ class ModalExample extends Component {
 
         trigger={<Button>Show Modal</Button>}
       >
-        <Modal.Header>Formulario de soliciut de ingreso</Modal.Header>
+        <Modal.Header>Formulario de solicitud de ingreso</Modal.Header>
 
         <Modal.Content>
         <FormularioDeSolicitud />
