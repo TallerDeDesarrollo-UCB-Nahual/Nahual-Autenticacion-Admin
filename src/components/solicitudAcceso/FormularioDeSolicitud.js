@@ -24,8 +24,7 @@ export default class EditarEgresades extends Component {
 
     enConfirmacion = (evento) => {
         evento.preventDefault();
-        console.log("hola ke ase")
-        window.location.reload();
+        //redirigir
     }
 
     
