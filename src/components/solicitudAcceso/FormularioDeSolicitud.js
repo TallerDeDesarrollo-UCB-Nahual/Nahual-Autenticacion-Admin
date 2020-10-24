@@ -1,17 +1,33 @@
 import React, { Component } from 'react'
 import {Button } from 'semantic-ui-react'
+import jwt_decode from "jwt-decode";
 import {Form, Input, TextArea, Field } from 'semantic-ui-react-form-validator';
 import '../../public/Stylesheets/FormularioDeSolicitud.css'
 
-export default class EditarEgresades extends Component {
+function recuperarDatosDeUsuario(tokenDecodificado, origenDelUsuario){
+    let nombreCompleto = tokenDecodificado.given_name + " " + tokenDecodificado.family_name;
+    var estadoInicial = {correo: tokenDecodificado.email, nombre: nombreCompleto, motivo: '', origen: origenDelUsuario};
+    return estadoInicial;
+}
+
+export default class FormularioDeSolicitud extends Component {
 
     constructor(){
         super();
         this.state = {
             correo: '',
             nombre: '',
-            motivo: ''
+            motivo: '',
+            origen: ''
         }
+    }
+
+    componentDidMount(){
+        let params = (new URL(window.location.href)).searchParams;
+        let searchParams = new URLSearchParams(params);
+        var token = searchParams.get('token');
+        var tokenDecodificado = jwt_decode(token);
+        this.setState(recuperarDatosDeUsuario(tokenDecodificado, searchParams.get('redirect')));
     }
 
     onChangeInput = (e, {value, name}) => {
@@ -24,7 +40,7 @@ export default class EditarEgresades extends Component {
 
     enConfirmacion = (evento) => {
         evento.preventDefault();
-        //redirigir
+        console.log(this.state);
     }
 
     
@@ -65,7 +81,8 @@ export default class EditarEgresades extends Component {
                     value = {this.state.motivo}
                     onChange={this.onChangeInput}
                 />
-                <Button className="boton_confirm" onClick={() => window.location = "http://localhost:3000/"}>Confirmar</Button>
+                <Button type='submit' className="boton_confirm" onSubmit={this.enConfirmacion}>Confirmar</Button>
+                {/* onClick={() => window.location = "http://localhost:3000/"} */}
             </Form>
         )
     }
