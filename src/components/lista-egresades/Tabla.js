@@ -3,7 +3,6 @@ import { Label, Button, Message, Table, Search } from 'semantic-ui-react'
 import Modal from '../egresade/ver-egresade/Modal'
 import '../../public/stylesheets/Table.css';
 import { Link } from 'react-router-dom';
-import ModalDeImportar from '../boton-importar/ModalDeImportar';
 import Eliminar from '../egresade/eliminar-egresade/Eliminar';
 
 class Nahual_Table extends Component {
@@ -31,7 +30,7 @@ class Nahual_Table extends Component {
   }
 
   obtenerEgresades() {
-    fetch(`http://localhost:3000/peticiones`)
+    fetch(`http://localhost:8000/peticiones`)
       .then(res => {
         return res.json()
       })
