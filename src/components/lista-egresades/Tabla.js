@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { Label, Button, Message, Table, Search } from 'semantic-ui-react'
-import Modal from '../egresade/ver-egresade/Modal'
 import '../../public/stylesheets/Table.css';
-import { Link } from 'react-router-dom';
-import Eliminar from '../egresade/eliminar-egresade/Eliminar';
 
 class Nahual_Table extends Component {
   constructor() {
@@ -15,21 +12,9 @@ class Nahual_Table extends Component {
       mostrarMensajeDeEstado: false,
       open: false
     }
-    this.enRegistroExitoso = this.enRegistroExitoso.bind(this)
   }
 
-  enRegistroExitoso(contador) {
-    console.log(contador)
-    if (contador > 0) {
-      this.setState({
-        mensajeDeEstado: "Se realizo el registro de " + contador + " egresados exitosamente.",
-        mostrarMensajeDeEstado: true
-      });
-    }
-    this.obtenerEgresades();
-  }
-
-  obtenerEgresades() {
+  obtenerSolicitudes() {
     fetch(`http://localhost:8000/peticiones`)
       .then(res => {
         return res.json()
@@ -44,41 +29,10 @@ class Nahual_Table extends Component {
       })
   }
 
-  eliminarEgresadesVista(id) {
-    this.obtenerEgresades();
-  }
-
   componentDidMount() {
-    this.obtenerEgresades();
+    this.obtenerSolicitudes();
   }
 
-  mostrarModal() {
-    this.setState({ mostrarModal: true });
-  }
-
-  manejarProblemas = () => {
-    this.setState({ mostrarMensajeDeEstado: false })
-  }
-
-  buscarPorNombre(nombre) {
-    let buscado = nombre.target.value;
-    let listaEgresades = this.state.api;
-    let resultados = Array(0);
-
-    if (nombre.target.value.trim() === "") {
-      this.setState({
-        filasEncontradas: this.state.api
-      });
-    }
-    for (let contador = 0; contador < listaEgresades.length; contador++) {
-      if (listaEgresades[contador].nombreCompleto.toLowerCase().includes(buscado.toLowerCase())) {
-        resultados.push(listaEgresades[contador]);
-      }
-    }
-    this.setState({
-      filasEncontradas: resultados
-    });
-  }
 
   render() {
     return (
