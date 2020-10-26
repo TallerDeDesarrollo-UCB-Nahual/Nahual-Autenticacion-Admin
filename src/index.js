@@ -4,18 +4,13 @@ import './index.css';
 import { BrowserRouter as Router} from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ProveedorAuth0ConHistoria from "./components/inicio-de-sesion/ProveedorAuth0ConHistoria";
-
 
 ReactDOM.render(
-<Router>
-    <ProveedorAuth0ConHistoria>
+  <Router>
       <App />
-    </ProveedorAuth0ConHistoria>
   </Router>
 , document.getElementById('root')
 );
-
 
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";

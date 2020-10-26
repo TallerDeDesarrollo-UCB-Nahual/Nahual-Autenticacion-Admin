@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Label, Button, Message, Table, Search } from 'semantic-ui-react'
+import { Label, Button, Message, Table } from 'semantic-ui-react'
 import '../../public/stylesheets/Table.css';
+import Navbar from './Navbar';
 
 class Nahual_Table extends Component {
   constructor() {
@@ -10,18 +11,18 @@ class Nahual_Table extends Component {
       filasEncontradas: Array(0),
       mensajeDeEstado: "",
       mostrarMensajeDeEstado: false,
-      open: false
+      open: false,
+      isLoading:false
     }
   }
 
   obtenerSolicitudes() {
-    fetch(`http://localhost:8000/peticiones`)
+    fetch(`http://localhost:3000/solicitudes`)
       .then(res => {
         return res.json()
       })
       .then(res => {
         let dat = res;
-        console.log(dat);
         this.setState({
           api: dat.data,
           filasEncontradas: dat.data
@@ -29,30 +30,57 @@ class Nahual_Table extends Component {
       })
   }
 
+
   componentDidMount() {
     this.obtenerSolicitudes();
   }
 
+  mostrarMensaje() {
+    this.setState({ mostrarMensajeDeEstado: true });
+  }
+
+  manejarProblemas = () => {
+    this.setState({ mostrarMensajeDeEstado: false })
+  }
+
+  otorgarAcceso=async(value)=>{
+    this.setState({isLoading:true})
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(value)
+    };
+    try {
+      var res = await fetch(`http://localhost:3000/otorgarAcceso`,requestOptions)
+      console.log(res);
+      this.mostrarMensaje();
+      this.setState({mensajeDeEstado:`Se le otorgo el acceso al usuario ${value.email}`})
+      res = await fetch(`http://localhost:3000/solicitudes/${value.id}`,{method:'DELETE'})
+    } catch (error) {
+      console.log(error);
+    }
+    this.setState({isLoading:false})
+    this.componentDidMount()
+  }
 
   render() {
     return (
       <div>
+        <Navbar/>
         <div className="tabla">
           <p className="titulo">Lista de Solicitudes</p>
           <div className="linea"></div>
           <div>
-            {this.state.mostrarMensajeDeEstado ?
+            {this.state.mostrarMensajeDeEstado &&
               <Message
                 positive
                 onDismiss={this.manejarProblemas}
-                header='Registro exitoso!'
+                header='Solicitud Aceptada!'
                 content={this.state.mensajeDeEstado}
               ></Message>
-              :
-              <p></p>
             }
           </div>
-          <br /><br />
+          <br/><br />
           <Table celled className="tarjeta-tabla">
             <Table.Header>
               <Table.Row >
@@ -65,21 +93,21 @@ class Nahual_Table extends Component {
             </Table.Header>
 
             <Table.Body>
-              {this.state.filasEncontradas.map((value) => (
-                <Table.Row key={value.id} >
+              {this.state.filasEncontradas && this.state.filasEncontradas.map((value) => (
+                <Table.Row key={value.id}>
                   <Table.Cell className="bordes-tabla">
-                    <Label className="nombre">{value.name}</Label><br></br>
+                    <Label className="nombre">{value.nombre}</Label><br></br>
                     <Label className="email">{value.email}</Label>
                   </Table.Cell >
                   
                   <Table.Cell className="bordes-tabla">
-                    <div> {value.reason}</div></Table.Cell>
+                    <div> {value.razon}</div></Table.Cell>
                   <Table.Cell className="bordes-tabla">
-                    <div> {value.resourcePetition}</div></Table.Cell>
+                    <div> {value.aplicacion}</div></Table.Cell>
                   <Table.Cell className="bordes-tabla">
-                    <Button>dummy</Button>
+                  <Button disabled={this.state.isLoading} positive onClick={()=>this.otorgarAcceso(value)}>Otorgar Accesso</Button>
                   </Table.Cell>
-                    
+                     
                   
                 </Table.Row>
               ))}
@@ -92,7 +120,6 @@ class Nahual_Table extends Component {
               </Table.Row>
             </Table.Footer>
           </Table>
-
         </div>
       </div>)
 
