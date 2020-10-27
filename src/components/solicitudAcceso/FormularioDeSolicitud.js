@@ -7,7 +7,7 @@ import axios  from 'axios';
 import MensajeResultante from './tipo-mensaje/MensajeResultante.js';
 import '../../public/Stylesheets/FormularioDeSolicitud.css'
 
-const rutaSolicitudes = 'https://nahual-auth-api.herokuapp.com/api/solicitudes';
+const rutaSolicitudes = 'https://nahual-authentication-api.herokuapp.com/api/solicitudes';
 
 function prepararEstadoAPartirDe(desencriptado){
     return ({
