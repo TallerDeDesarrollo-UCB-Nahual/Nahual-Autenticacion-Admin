@@ -64,9 +64,9 @@ export default class FormularioDeSolicitud extends Component {
         evento.preventDefault();
         var estadoDepurado = { 
             nombre: this.state.nombre,
-            correo: this.state.correo,
-            motivo: this.state.motivo,
-            origen: this.state.origen
+            email: this.state.correo,
+            razon: this.state.motivo,
+            aplicacion: this.state.origen
         }
         axios.post(rutaSolicitudes, estadoDepurado)
         .then(function (respuesta){
@@ -125,9 +125,9 @@ export default class FormularioDeSolicitud extends Component {
                     <Button type='submit' className="boton_confirm" onSubmit={this.enConfirmacion}>Confirmar</Button>
                 </Form>
                 {(this.state.exito === true) && (
-                <MensajeResultante encabezadoDelMensaje= "Solicitud exitosa" cuerpoDelMensaje="Espere por favor hasta que se apruebe su solicitud" colorDeFondo="green"/>)}
+                <MensajeResultante encabezadoDelMensaje= "Solicitud exitosa" cuerpoDelMensaje="Espere por favor hasta que se apruebe su solicitud, volverá a la página anterior" colorDeFondo="green"/>)}
                 {(this.state.exito === false) && (
-                <MensajeResultante encabezadoDelMensaje= "Solicitud no exitosa" cuerpoDelMensaje="Hubo un error al momento de enviar, intenta de nuevo más tarde" colorDeFondo="red"/>)}
+                <MensajeResultante encabezadoDelMensaje= "Solicitud no exitosa" cuerpoDelMensaje="Hubo un error al momento de enviar, intente de nuevo más tarde" colorDeFondo="red"/>)}
             </div>
             )     
         }
