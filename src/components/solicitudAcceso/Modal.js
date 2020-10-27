@@ -19,12 +19,10 @@ class ModalExample extends Component {
   render() {
     return (
         <Modal
-        onClose={() => this.setOpen(false)}
+        onClose={() => this.setOpen(true)}
         onOpen={() => this.setOpen(true)}
         open={this.state.open}
         size={"small"}
-
-        trigger={<Button>Ver Fomulario</Button>}
       >
         <Modal.Header>Formulario de solicitud de ingreso</Modal.Header>
 
