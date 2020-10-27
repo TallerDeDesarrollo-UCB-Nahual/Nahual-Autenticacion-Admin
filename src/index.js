@@ -8,14 +8,11 @@ import 'semantic-ui-css/semantic.min.css'
 import ProveedorAuth0ConHistoria from "./components/inicio-de-sesion/ProveedorAuth0ConHistoria";
 
 ReactDOM.render(
-<Router>
-    <ProveedorAuth0ConHistoria>
+  <Router>
       <App />
-    </ProveedorAuth0ConHistoria>
   </Router>
 , document.getElementById('root')
 );
-
 
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
