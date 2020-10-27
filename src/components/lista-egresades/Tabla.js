@@ -15,13 +15,13 @@ class Nahual_Table extends Component {
   }
 
   obtenerSolicitudes() {
-    fetch(`http://localhost:8000/peticiones`)
+    fetch(`http://localhost:3001/solicitudes`)
       .then(res => {
         return res.json()
       })
       .then(res => {
         let dat = res;
-        console.log(dat);
+        console.log(res);
         this.setState({
           api: dat.data,
           filasEncontradas: dat.data
@@ -68,14 +68,14 @@ class Nahual_Table extends Component {
               {this.state.filasEncontradas.map((value) => (
                 <Table.Row key={value.id} >
                   <Table.Cell className="bordes-tabla">
-                    <Label className="nombre">{value.name}</Label><br></br>
+                    <Label className="nombre">{value.nombre}</Label><br></br>
                     <Label className="email">{value.email}</Label>
                   </Table.Cell >
                   
                   <Table.Cell className="bordes-tabla">
-                    <div> {value.reason}</div></Table.Cell>
+                    <div> {value.razon}</div></Table.Cell>
                   <Table.Cell className="bordes-tabla">
-                    <div> {value.resourcePetition}</div></Table.Cell>
+                    <div> {value.aplicacion}</div></Table.Cell>
                   <Table.Cell className="bordes-tabla">
                     <Button>dummy</Button>
                   </Table.Cell>
