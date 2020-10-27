@@ -5,7 +5,6 @@ import {Form, Input, TextArea, Field } from 'semantic-ui-react-form-validator';
 import CryptoJS from 'crypto-js';
 import axios  from 'axios';
 import MensajeResultante from './tipo-mensaje/MensajeResultante.js';
-import '../../public/Stylesheets/FormularioDeSolicitud.css'
 
 const rutaSolicitudes = 'https://nahual-authentication-api.herokuapp.com/api/solicitudes';
 
