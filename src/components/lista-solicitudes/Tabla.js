@@ -17,7 +17,7 @@ class Nahual_Table extends Component {
   }
 
   obtenerSolicitudes() {
-    fetch(`http://localhost:3000/solicitudes`)
+    fetch(`https://nahual-authentication-api.herokuapp.com/api/solicitudes`)
       .then(res => {
         return res.json()
       })
@@ -51,11 +51,11 @@ class Nahual_Table extends Component {
       body: JSON.stringify(value)
     };
     try {
-      var res = await fetch(`http://localhost:3000/otorgarAcceso`,requestOptions)
+      var res = await fetch(`https://nahual-authentication-api.herokuapp.com/api/otorgarAcceso`,requestOptions)
       console.log(res);
       this.mostrarMensaje();
       this.setState({mensajeDeEstado:`Se le otorgo el acceso al usuario ${value.email}`})
-      res = await fetch(`http://localhost:3000/solicitudes/${value.id}`,{method:'DELETE'})
+      res = await fetch(`https://nahual-authentication-api.herokuapp.com/api/solicitudes/${value.id}`,{method:'DELETE'})
     } catch (error) {
       console.log(error);
     }
