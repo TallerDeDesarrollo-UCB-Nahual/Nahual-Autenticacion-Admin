@@ -3,19 +3,37 @@ import { Redirect } from "react-router-dom"
 import {Button } from 'semantic-ui-react'
 import {Form, Input, TextArea, Field } from 'semantic-ui-react-form-validator';
 import CryptoJS from 'crypto-js';
+import axios  from 'axios';
+import MensajeResultante from './tipo-mensaje/MensajeResultante.js';
 import '../../public/Stylesheets/FormularioDeSolicitud.css'
 
+const rutaSolicitudes = 'https://nahual-auth-api.herokuapp.com/api/solicitudes';
+
+function prepararEstadoAPartirDe(desencriptado){
+    return ({
+        nombre: desencriptado.nombre,
+        correo: desencriptado.correo,
+        origen: desencriptado.origen,
+        redirigirA: desencriptado.redirigir,
+        motivo: '',
+        permitido : true,
+        exito: null
+    });
+}
 
 export default class FormularioDeSolicitud extends Component {
-
+   
     constructor(props){
+        
         super();
         this.state = {
             nombre: "",
             correo: "",
             origen: "",
             motivo: "",
-            permitido: true
+            redirigirA: "",  
+            permitido: true,
+            exito: null
         }
     }
 
@@ -27,12 +45,10 @@ export default class FormularioDeSolicitud extends Component {
 
             var AES = require("crypto-js/aes");
             var desencriptado = JSON.parse(AES.decrypt(datos, 'Nahual123').toString(CryptoJS.enc.Utf8));
-            this.setState({nombre:desencriptado.nombre});
-            this.setState({origen:desencriptado.origen});
-            
+            this.setState(prepararEstadoAPartirDe(desencriptado));   
             
         } catch (error) {
-            this.setState({permitido: false});
+            this.setState({permitido:false});
         }
     }
 
@@ -46,51 +62,74 @@ export default class FormularioDeSolicitud extends Component {
 
     enConfirmacion = (evento) => {
         evento.preventDefault();
-        console.log(this.state);
+        var estadoDepurado = { 
+            nombre: this.state.nombre,
+            correo: this.state.correo,
+            motivo: this.state.motivo,
+            origen: this.state.origen
+        }
+        axios.post(rutaSolicitudes, estadoDepurado)
+        .then(function (respuesta){
+            this.setState({exito:true});
+            setTimeout(() => { this.setState({ exito: null }); window.location.replace(this.state.redirigirA);}, 4000); 
+            
+        }.bind(this))
+        .catch(function(error){
+            this.setState({exito:false});
+            console.log(error);
+            setTimeout(() => { this.setState({ exito: null }); }, 5000); 
+        }.bind(this));
     }
-
     
     render() {
         if((this.state.permitido)){      
-            return (<Form id="myForm" className="ui form" onSubmit={this.enConfirmacion}>
-            <Input
-                name = "nombre" 
-                validators={['required','matchRegexp:^[A-Za-z ]+$']} 
-                errorMessages={['Este campo es requerido', 'El campo no acepta valores numéricos']} 
-                value = {this.state.nombre}
-                id='form-input-control-first-name'
-                label='Nombre completo'
-                placeholder='Nombre completo'
-                width={16}
-                onChange={this.onChangeInput}
-            />
-            <Input
-                name="correo"
-                type="email"
-                id='form-input-control-error-email'
-                label='Correo'
-                placeholder='ejemplo@****.com'
-                validators={['required']} 
-                errorMessages={['Este campo es requerido']} 
-                value = {this.state.correo}
-                width={16}
-                onChange={this.onChangeInput}
-            />
-            <TextArea
-                name = "motivo" 
-                type="text"
-                id='form-textarea-control-opinion'
-                label='Motivo'
-                placeholder='Motivo'
-                validators={['required']} 
-                errorMessages={['Este campo es requerido']} 
-                value = {this.state.motivo}
-                onChange={this.onChangeInput}
-            />
-            <Button type='submit' className="boton_confirm" onSubmit={this.enConfirmacion}>Confirmar</Button>
-            {/* onClick={() => window.location = "http://localhost:3000/"} */}
-        </Form>
-            )
+            return (
+                <div>
+                    <Form id="myForm" className="ui form" onSubmit={this.enConfirmacion}>
+                    <Input 
+                        name = "nombre" 
+                        validators={['required','matchRegexp:^[A-Za-z ]+$']} 
+                        errorMessages={['Este campo es requerido', 'El campo no acepta valores numéricos']} 
+                        value = {this.state.nombre}
+                        id='form-input-control-first-name'
+                        label='Nombre completo'
+                        placeholder='Nombre completo'
+                        width={16}
+                        disabled
+                        onChange={this.onChangeInput}
+                    />
+                    <Input
+                        name="correo"
+                        type="email"
+                        id='form-input-control-error-email'
+                        label='Correo'
+                        placeholder='ejemplo@****.com'
+                        validators={['required']} 
+                        errorMessages={['Este campo es requerido']} 
+                        value = {this.state.correo}
+                        width={16}
+                        disabled
+                        onChange={this.onChangeInput}
+                    />
+                    <TextArea
+                        name = "motivo" 
+                        type="text"
+                        id='form-textarea-control-opinion'
+                        label='Motivo'
+                        placeholder='Cuéntenos su razón para ingresar a la aplicación...'
+                        validators={['required']} 
+                        errorMessages={['Este campo es requerido']} 
+                        value = {this.state.motivo}
+                        onChange={this.onChangeInput}
+                    />
+                    <Button type='submit' className="boton_confirm" onSubmit={this.enConfirmacion}>Confirmar</Button>
+                </Form>
+                {(this.state.exito === true) && (
+                <MensajeResultante encabezadoDelMensaje= "Solicitud exitosa" cuerpoDelMensaje="Espere por favor hasta que se apruebe su solicitud" colorDeFondo="green"/>)}
+                {(this.state.exito === false) && (
+                <MensajeResultante encabezadoDelMensaje= "Solicitud no exitosa" cuerpoDelMensaje="Hubo un error al momento de enviar, intenta de nuevo más tarde" colorDeFondo="red"/>)}
+            </div>
+            )     
         }
         else{
             return(

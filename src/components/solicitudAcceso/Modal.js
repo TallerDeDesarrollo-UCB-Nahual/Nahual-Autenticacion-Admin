@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, Header } from 'semantic-ui-react';
-import FormularioDeSolicitud from './FormularioDeSolicitud'
+import FormularioDeSolicitud from './FormularioDeSolicitud';
 
 class ModalExample extends Component {
   constructor() {
