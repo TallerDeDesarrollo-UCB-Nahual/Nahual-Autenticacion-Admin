@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Label, Button, Message, Table } from 'semantic-ui-react'
-import '../../public/stylesheets/Table.css';
+import '../../public/Stylesheets/Table.css';
 import Navbar from './Navbar';
 
 class Nahual_Table extends Component {
@@ -68,7 +68,15 @@ class Nahual_Table extends Component {
       <div>
         <Navbar/>
         <div className="tabla">
-          <p className="titulo">Lista de Solicitudes</p>
+          <div>
+            <Button
+            className="AccesoCorreo"
+            color = 'green'
+            floated='right'
+            >Dar Acceso A Correo</Button>
+            <p className="titulo">Lista de Solicitudes</p>
+            <br/>
+          </div>
           <div className="linea"></div>
           <div>
             {this.state.mostrarMensajeDeEstado &&
