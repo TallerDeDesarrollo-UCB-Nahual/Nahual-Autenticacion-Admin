@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Nahual_Table from './components/lista-solicitudes/Tabla';
 import Modal from './components/solicitudAcceso/Modal';
 import Error from './components/solicitudAcceso/Error';
+import { Solicitudes } from './components/lista-solicitudes/Solicitudes';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
             </React.Fragment>
           )}/>
           <Route path='/error' exact component={Error}/>
-          <Route path="/solicitudes" component={Nahual_Table} />
+          <Route path="/solicitudes" component={Solicitudes} />
         </Switch>
       </Router>
     </div>
