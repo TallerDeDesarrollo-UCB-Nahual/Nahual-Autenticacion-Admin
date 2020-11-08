@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Label, Button, Message, Table } from 'semantic-ui-react'
 import '../../public/Stylesheets/Table.css';
 import Navbar from './Navbar';
+import ModalAcceso from '../otorgar-acceso/ModalAcceso'
 
 class Nahual_Table extends Component {
   constructor() {
@@ -68,15 +69,9 @@ class Nahual_Table extends Component {
       <div>
         <Navbar/>
         <div className="tabla">
-          <div>
-            <Button
-            className="AccesoCorreo"
-            color = 'green'
-            floated='right'
-            >Dar Acceso A Correo</Button>
-            <p className="titulo">Lista de Solicitudes</p>
-            <br/>
-          </div>
+          <ModalAcceso></ModalAcceso>
+          <p className="titulo">Lista de Solicitudes</p>
+          <br/>
           <div className="linea"></div>
           <div>
             {this.state.mostrarMensajeDeEstado &&
