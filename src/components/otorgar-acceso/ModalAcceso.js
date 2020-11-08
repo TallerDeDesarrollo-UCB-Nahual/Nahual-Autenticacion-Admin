@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal } from 'semantic-ui-react'
+import CuerpoModal from './CuerpoModal'
 
 class ModalAcceso extends Component {
   constructor(props) {
@@ -25,13 +26,7 @@ class ModalAcceso extends Component {
         closeIcon
         trigger={<Button className='AccesoCorreo'  color = 'green' floated='right'  onClick={() => (this.mostrarModal(true))}>Dar Acceso A Correo</Button>}
       >
-        {
-        <Modal.Actions>
-          <Button basic color="grey" onClick={() => (this.mostrarModal(false))}>
-            Cerrar
-          </Button>
-        </Modal.Actions> 
-        }
+        <CuerpoModal cerrarModal={() => (this.mostrarModal (false))}></CuerpoModal>
       </Modal>
     )
   }
