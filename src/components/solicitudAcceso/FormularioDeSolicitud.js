@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from "react-router-dom"
 import {Button } from 'semantic-ui-react'
-import {Form, Input, TextArea, Field } from 'semantic-ui-react-form-validator';
+import {Form, Input, TextArea } from 'semantic-ui-react-form-validator';
 import CryptoJS from 'crypto-js';
 import axios  from 'axios';
 import MensajeResultante from './tipo-mensaje/MensajeResultante.js';
