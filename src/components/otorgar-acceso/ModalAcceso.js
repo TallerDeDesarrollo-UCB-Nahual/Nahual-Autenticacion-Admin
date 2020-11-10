@@ -26,7 +26,7 @@ class ModalAcceso extends Component {
         closeIcon
         trigger={<Button className='AccesoCorreo'  color = 'green' floated='right'  onClick={() => (this.mostrarModal(true))}>Dar Acceso A Correo</Button>}
       >
-        <CuerpoModal cerrarModal={() => (this.mostrarModal (false))}></CuerpoModal>
+        <CuerpoModal añadirAcceso={(solicitud)=>(this.props.añadirAcceso(solicitud))} cerrarModal={() => (this.mostrarModal (false))}></CuerpoModal> 
       </Modal>
     )
   }

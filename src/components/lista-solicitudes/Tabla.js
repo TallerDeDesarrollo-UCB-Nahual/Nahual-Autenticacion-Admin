@@ -69,7 +69,7 @@ class Nahual_Table extends Component {
       <div>
         <Navbar/>
         <div className="tabla">
-          <ModalAcceso></ModalAcceso>
+          <ModalAcceso añadirAcceso={(solicitud)=>(this.setState({api:this.state.api.push(solicitud)}))}></ModalAcceso>
           <p className="titulo">Lista de Solicitudes</p>
           <br/>
           <div className="linea"></div>
