@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Button } from 'semantic-ui-react'
+import {Button, Dropdown} from 'semantic-ui-react'
 import {Form, Input} from 'semantic-ui-react-form-validator'
 
 
@@ -31,7 +31,17 @@ class FormAcceso extends Component{
       }
       console.log(estadoDepurado);
   }
+  getAplicacion = (evento, {valor}) => {
+    console.log(valor);
+    let nombreAplicacion = evento.target.textContent;
+    console.log(nombreAplicacion);
+}
   render() {
+    const opcionesAplicacion = [
+      { key: 'admin', text: 'Admin', value: 'admin' },
+      { key: 'nahual', text: 'Nahual', value: 'nahual' },
+      { key: 'empresas', text: 'Empresas', value: 'empresas' },
+    ]
     return (
       <Form id="myForm" onSubmit={this.enConfirmacion}>
         <Input 
@@ -56,6 +66,9 @@ class FormAcceso extends Component{
           errorMessages={['Este campo es requerido']} 
           width={16}
           onChange={this.cambioEnInput}
+        />
+        <Dropdown placeholder='Aplicación' fluid multiple selection options={opcionesAplicacion}
+        onChange={this.getAplicacion}
         />
         <Button floated='right' type='submit' onSubmit={this.enConfirmacion}>Otorgar Acceso</Button>
       </Form>
