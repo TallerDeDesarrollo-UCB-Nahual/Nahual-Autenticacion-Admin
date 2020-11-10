@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Label, Message, Table } from "semantic-ui-react";
-import "../../public/stylesheets/Table.css";
+import "../../public/Stylesheets/Table.css";
 const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
   process.env.REACT_APP_SOLICITAR_ACCESO_URL;
 export class SolicitudesAprobadas extends Component {
@@ -10,7 +10,7 @@ export class SolicitudesAprobadas extends Component {
       solicitudes: [],
       error: ""
     };
-    this.props.estableserCargando(true);
+    this.props.mostrarCargando(true);
   }
   obtenerSolicitudes() {
     fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}usuariosConAcceso`)
@@ -21,13 +21,13 @@ export class SolicitudesAprobadas extends Component {
         this.setState({
           solicitudes: res.data
         });
-        this.props.estableserCargando(false);
+        this.props.mostrarCargando(false);
       })
       .catch((error) => {
         this.setState({
           error: error.message
         });
-        this.props.estableserCargando(false);
+        this.props.mostrarCargando(false);
       });
   }
   mostrarError() {
@@ -76,7 +76,7 @@ export class SolicitudesAprobadas extends Component {
                         <Label className="email">{solicitud.email}</Label>
                       </Table.Cell>
                       <Table.Cell className="bordes-tabla">
-                        <Button positive>Revocar Accesso</Button>
+                        <Button positive>Revocar Acceso</Button>
                       </Table.Cell>
                     </Table.Row>
                   ))}

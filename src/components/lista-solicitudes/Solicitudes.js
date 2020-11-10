@@ -23,7 +23,7 @@ export const Solicitudes = () => {
       render: () => (
         <Tab.Pane loading={estaCargandoSolicitudesPendientes}>
           <SolicitudesPendientes
-            estableserCargando={(cargando) =>
+            mostrarCargando={(cargando) =>
               setEstaCargandoSolicitudesPendientes(cargando)
             }
           />
@@ -39,7 +39,7 @@ export const Solicitudes = () => {
       render: () => (
         <Tab.Pane loading={estaCargandoSolicitudesAprobadas}>
           <SolicitudesAprobadas
-            estableserCargando={(cargando) =>
+            mostrarCargando={(cargando) =>
               setEstaCargandoSolicitudesAprobadas(cargando)
             }
           />
