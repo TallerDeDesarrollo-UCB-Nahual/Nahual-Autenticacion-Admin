@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Label, Button, Message, Table } from "semantic-ui-react";
-import "../../public/stylesheets/Table.css";
+import "../../public/Stylesheets/Table.css";
 
 const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
   process.env.REACT_APP_SOLICITAR_ACCESO_URL;
@@ -13,10 +13,10 @@ class SolicitudesPendientes extends Component {
       mensajeDeEstado: "",
       mostrarMensajeDeEstado: false,
       open: false,
-      isLoading: false,
+      estaCargando: false,
       error: ""
     };
-    this.props.estableserCargando(true);
+    this.props.mostrarCargando(true);
   }
 
   obtenerSolicitudes() {
@@ -24,18 +24,18 @@ class SolicitudesPendientes extends Component {
       .then((res) => {
         return res.json();
       })
-      .then((res) => {
-        let dat = res;
+      .then((respuesta) => {
+        let datoRespuesta = respuesta;
         this.setState({
-          api: dat.data,
-          filasEncontradas: dat.data
+          api: datoRespuesta.data,
+          filasEncontradas: datoRespuesta.data
         });
-        this.props.estableserCargando(false);
+        this.props.mostrarCargando(false);
       }).catch((error) => {
         this.setState({
           error: error.message
         });
-        this.props.estableserCargando(false);
+        this.props.mostrarCargando(false);
       });
   }
 
@@ -51,25 +51,24 @@ class SolicitudesPendientes extends Component {
     this.setState({ mostrarMensajeDeEstado: false });
   };
 
-  otorgarAcceso = async (value) => {
-    this.setState({ isLoading: true });
+  otorgarAcceso = async (valor) => {
+    this.setState({ estaCargando: true });
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(value)
+      body: JSON.stringify(valor)
     };
     try {
       var res = await fetch(
         `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}otorgarAcceso`,
         requestOptions
       );
-      console.log(res);
       this.mostrarMensaje();
       this.setState({
-        mensajeDeEstado: `Se le otorgo el acceso al usuario ${value.email}`
+        mensajeDeEstado: `Se le otorgó el acceso al usuario ${valor.email}.`
       });
       res = await fetch(
-        `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes/${value.id}`,
+        `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes/${valor.id}`,
         { method: "DELETE" }
       );
     } catch (error) {
@@ -77,9 +76,9 @@ class SolicitudesPendientes extends Component {
       this.setState({
         error: error.message
       });
-      this.props.estableserCargando(false);
+      this.props.mostrarCargando(false);
     }
-    this.setState({ isLoading: false });
+    this.setState({ estaCargando: false });
     this.componentDidMount();
   };
 
@@ -103,7 +102,7 @@ class SolicitudesPendientes extends Component {
               <Message
                 positive
                 onDismiss={this.manejarProblemas}
-                header="Solicitud Aceptada!"
+                header="!Solicitud Aceptada!"
                 content={this.state.mensajeDeEstado}
               ></Message>
             )}
@@ -144,11 +143,11 @@ class SolicitudesPendientes extends Component {
                       </Table.Cell>
                       <Table.Cell className="bordes-tabla">
                         <Button
-                          disabled={this.state.isLoading}
+                          disabled={this.state.estaCargando}
                           positive
                           onClick={() => this.otorgarAcceso(value)}
                         >
-                          Otorgar Accesso
+                          Otorgar Acceso
                         </Button>
                       </Table.Cell>
                     </Table.Row>
