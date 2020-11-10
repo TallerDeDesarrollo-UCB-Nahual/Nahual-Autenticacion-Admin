@@ -43,6 +43,23 @@ class Nahual_Table extends Component {
     this.setState({ mostrarMensajeDeEstado: false })
   }
 
+  eliminarSolicitud=async(value)=>{
+    this.setState({isLoading:true})
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(value)
+    };
+    try {
+      var res = await fetch(`https://nahual-authentication-api.herokuapp.com/api/solicitudes/${value.id}`,{method:'DELETE'})
+    } catch (error) {
+      console.log(error);
+    }
+    this.setState({isLoading:false})
+    this.componentDidMount()
+  }
+
+
   otorgarAcceso=async(value)=>{
     this.setState({isLoading:true})
     const requestOptions = {
@@ -106,6 +123,7 @@ class Nahual_Table extends Component {
                     <div> {value.aplicacion}</div></Table.Cell>
                   <Table.Cell className="bordes-tabla">
                   <Button disabled={this.state.isLoading} positive onClick={()=>this.otorgarAcceso(value)}>Otorgar Accesso</Button>
+                  <Button disabled={this.state.isLoading} negative onClick={()=>this.eliminarSolicitud(value)}>Eliminar Solicitud</Button>
                   </Table.Cell>
                      
                   
