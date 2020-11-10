@@ -10,13 +10,8 @@ const CuerpoModal = ({cerrarModal}) => {
         <Image src={LogoNahual} size='small' />
       </Modal.Header>
       <Modal.Content scrolling>
-        <FormAcceso></FormAcceso>
+        <FormAcceso cerrarModal={cerrarModal}></FormAcceso>
       </Modal.Content>
-      <Modal.Actions>
-        <Button floated='right' basic color="grey" onClick={cerrarModal}>
-          Cerrar
-        </Button>
-      </Modal.Actions> 
     </>
   )
 }

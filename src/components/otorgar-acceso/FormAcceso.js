@@ -9,17 +9,13 @@ class FormAcceso extends Component{
     this.state = {
         nombre: "",
         correo: "",
-        aplicacion:"",
+        aplicaciones:[],
         exito: null
     }
   }
 
   cambioEnInput = (e, {value, name}) => {
-    let valor = this.state[e.target.name];
-    let nombre = e.target.name;
-    this.setState({[nombre]: value})
-    valor = value;
-    this.state[e.target.name] = valor;
+    this.setState({[name]: value})
   }
 
   enConfirmacion = (evento) => {
@@ -27,15 +23,11 @@ class FormAcceso extends Component{
       var estadoDepurado = { 
           nombre: this.state.nombre,
           email: this.state.correo,
-          aplicacion: this.state.aplicacion
+          aplicaciones: this.state.aplicaciones
       }
       console.log(estadoDepurado);
   }
-  getAplicacion = (evento, {valor}) => {
-    console.log(valor);
-    let nombreAplicacion = evento.target.textContent;
-    console.log(nombreAplicacion);
-}
+
   render() {
     const opcionesAplicacion = [
       { key: 'admin', text: 'Admin', value: 'admin' },
@@ -45,7 +37,7 @@ class FormAcceso extends Component{
     return (
       <Form id="myForm" onSubmit={this.enConfirmacion}>
         <Input 
-          name = "nombre" 
+          name = 'nombre'
           value = {this.state.nombre}
           validators={['required','matchRegexp:^[A-Za-z ]+$']} 
           errorMessages={['Este campo es requerido', 'El campo no acepta valores numéricos']} 
@@ -56,9 +48,9 @@ class FormAcceso extends Component{
           onChange={this.cambioEnInput}
         />
         <Input
-          name="correo"
+          name='correo'
           value = {this.state.correo}
-          type="email"
+          type='email'
           id='form-input-control-error-email'
           label='Correo'
           placeholder='ejemplo@****.com'
@@ -67,9 +59,19 @@ class FormAcceso extends Component{
           width={16}
           onChange={this.cambioEnInput}
         />
-        <Dropdown placeholder='Aplicación' fluid multiple selection options={opcionesAplicacion}
-        onChange={this.getAplicacion}
+        <p><b>Aplicaciones</b></p>
+        <Dropdown
+        compact
+        name='aplicaciones' 
+        placeholder='Aplicaciones'
+        validators={['required']}
+        fluid 
+        multiple selection 
+        options={opcionesAplicacion}
+        onChange={this.cambioEnInput}
         />
+        <br></br>
+        <Button floated='right'  color = 'red' onClick={this.props.cerrarModal}>Cancelar</Button>
         <Button floated='right' type='submit' onSubmit={this.enConfirmacion}>Otorgar Acceso</Button>
       </Form>
     )
