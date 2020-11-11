@@ -12,7 +12,7 @@ class SolicitudesPendientes extends Component {
       filasEncontradas: Array(0),
       mensajeDeEstado: "",
       mostrarMensajeDeEstado: false,
-      open: false,
+      abierto: false,
       estaCargando: false,
       error: ""
     };
@@ -81,31 +81,7 @@ class SolicitudesPendientes extends Component {
           error: "Problema al obtener los datos."
         });
         this.setState({ estaCargando: false });
-        this.props.mostrarCargando(false);
-      });
-
-    // try {
-    //   var res = await fetch(
-    //     `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}otorgarAcceso`,
-    //     requestOptions
-    //   );
-    //   this.mostrarMensaje();
-    //   this.setState({
-    //     mensajeDeEstado: `Se le otorgó el acceso al usuario ${valor.email}.`
-    //   });
-    //   res = await fetch(
-    //     `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes/${valor.id}`,
-    //     { method: "DELETE" }
-    //   );
-    // } catch (error) {
-    //   console.log(error);
-    //   this.setState({
-    //     error: error.message
-    //   });
-    //   this.props.mostrarCargando(false);
-    // }
-    // this.setState({ estaCargando: false });
-    // this.componentDidMount();
+        this.props.mostrarCargando(false);      });
   };
 
   listaVacia() {
@@ -113,13 +89,13 @@ class SolicitudesPendientes extends Component {
       <Message
         icon="warning sign"
         warning
-        header={`Error, problema al conectar con la base de datos.`}
+        header={"Error, problema al conectar con la base de datos."}
       />
     ) : (
       <Message
         icon="warning sign"
         warning
-        header={`No hay solitudes pendientes.`}
+        header={"No hay solicitudes pendientes."}
       />
     );
   }
@@ -151,13 +127,11 @@ class SolicitudesPendientes extends Component {
                   <Table.HeaderCell className="cabeceras-tabla">
                     Aplicación
                   </Table.HeaderCell>
-
                   <Table.HeaderCell className="cabeceras-tabla">
                     Acción
                   </Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
-
               <Table.Body>
                 {this.state.api &&
                   this.state.api.map((value) => (
@@ -167,7 +141,6 @@ class SolicitudesPendientes extends Component {
                         <br></br>
                         <Label className="email">{value.email}</Label>
                       </Table.Cell>
-
                       <Table.Cell className="bordes-tabla">
                         <div> {value.razon}</div>
                       </Table.Cell>
@@ -186,7 +159,6 @@ class SolicitudesPendientes extends Component {
                     </Table.Row>
                   ))}
               </Table.Body>
-
               <Table.Footer>
                 <Table.Row>
                   <Table.HeaderCell

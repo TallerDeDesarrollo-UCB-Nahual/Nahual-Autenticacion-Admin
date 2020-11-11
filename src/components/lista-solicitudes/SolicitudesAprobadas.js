@@ -44,13 +44,13 @@ export class SolicitudesAprobadas extends Component {
       <Message
         icon="warning sign"
         warning
-        header={`Error, problema al obtener los datos.`}
+        header={"Error, problema al obtener los datos."}
       />
     ) : (
       <Message
         icon="warning sign"
         warning
-        header={`No hay solitudes aprobadas.`}
+        header={"No hay solicitudes aprobadas."}
       />
     );
   }
