@@ -14,18 +14,18 @@ export class SolicitudesAprobadas extends Component {
   }
   obtenerSolicitudes() {
     fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}usuariosConAcceso`)
-      .then((res) => {
-        return res.json();
+      .then((respuesta) => {
+        return respuesta.json();
       })
-      .then((res) => {
+      .then((respuesta) => {
         this.setState({
-          solicitudes: res.data
+          solicitudes: respuesta.data
         });
         this.props.mostrarCargando(false);
       })
       .catch((error) => {
         this.setState({
-          error: error.message
+          error: "Problema al obtener los datos."
         });
         this.props.mostrarCargando(false);
       });
@@ -39,6 +39,22 @@ export class SolicitudesAprobadas extends Component {
     );
   }
 
+  listaVacia() {
+    return this.state.error ? (
+      <Message
+        icon="warning sign"
+        warning
+        header={`Error, problema al obtener los datos.`}
+      />
+    ) : (
+      <Message
+        icon="warning sign"
+        warning
+        header={`No hay solitudes aprobadas.`}
+      />
+    );
+  }
+
   componentDidMount() {
     this.obtenerSolicitudes();
   }
@@ -46,8 +62,8 @@ export class SolicitudesAprobadas extends Component {
   render() {
     return (
       <div>
-        {this.state.error ? (
-          this.mostrarError()
+        {this.state.solicitudes.length === 0 ? (
+          this.listaVacia()
         ) : (
           <div>
             <Table celled className="tarjeta-tabla">

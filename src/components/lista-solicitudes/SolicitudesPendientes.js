@@ -21,19 +21,19 @@ class SolicitudesPendientes extends Component {
 
   obtenerSolicitudes() {
     fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes`)
-      .then((res) => {
-        return res.json();
+      .then((respuesta) => {
+        return respuesta.json();
       })
       .then((respuesta) => {
-        let datoRespuesta = respuesta;
-        this.setState({
-          api: datoRespuesta.data,
-          filasEncontradas: datoRespuesta.data
-        });
+        respuesta.data &&
+          this.setState({
+            api: respuesta.data
+          });
         this.props.mostrarCargando(false);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         this.setState({
-          error: error.message
+          error: "Problema al obtener los datos."
         });
         this.props.mostrarCargando(false);
       });
@@ -58,44 +58,77 @@ class SolicitudesPendientes extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(valor)
     };
-    try {
-      var res = await fetch(
-        `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}otorgarAcceso`,
-        requestOptions
-      );
-      this.mostrarMensaje();
-      this.setState({
-        mensajeDeEstado: `Se le otorgó el acceso al usuario ${valor.email}.`
+    fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}otorgarAcceso`, requestOptions)
+      .then((respuesta) => {
+        return respuesta.json();
+      })
+      .then((respuesta) => {
+        fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes/${valor.id}`, {
+          method: "DELETE"
+        }).then((respuesta) => {
+          this.setState({
+            api: this.state.api.filter((solicitud) => solicitud.id !== valor.id)
+          });
+          this.mostrarMensaje();
+          this.setState({ estaCargando: false });
+          this.setState({
+            mensajeDeEstado: `Se le otorgó el acceso al usuario ${valor.email}.`
+          });
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          error: "Problema al obtener los datos."
+        });
+        this.setState({ estaCargando: false });
+        this.props.mostrarCargando(false);
       });
-      res = await fetch(
-        `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes/${valor.id}`,
-        { method: "DELETE" }
-      );
-    } catch (error) {
-      console.log(error);
-      this.setState({
-        error: error.message
-      });
-      this.props.mostrarCargando(false);
-    }
-    this.setState({ estaCargando: false });
-    this.componentDidMount();
+
+    // try {
+    //   var res = await fetch(
+    //     `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}otorgarAcceso`,
+    //     requestOptions
+    //   );
+    //   this.mostrarMensaje();
+    //   this.setState({
+    //     mensajeDeEstado: `Se le otorgó el acceso al usuario ${valor.email}.`
+    //   });
+    //   res = await fetch(
+    //     `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes/${valor.id}`,
+    //     { method: "DELETE" }
+    //   );
+    // } catch (error) {
+    //   console.log(error);
+    //   this.setState({
+    //     error: error.message
+    //   });
+    //   this.props.mostrarCargando(false);
+    // }
+    // this.setState({ estaCargando: false });
+    // this.componentDidMount();
   };
 
-  mostrarError() {
-    return (
-      <Message negative>
-        <Message.Header>Error</Message.Header>
-        <p>{this.state.error}</p>
-      </Message>
+  listaVacia() {
+    return this.state.error ? (
+      <Message
+        icon="warning sign"
+        warning
+        header={`Error, problema al conectar con la base de datos.`}
+      />
+    ) : (
+      <Message
+        icon="warning sign"
+        warning
+        header={`No hay solitudes pendientes.`}
+      />
     );
   }
 
   render() {
     return (
       <div>
-        {this.state.error ? (
-          this.mostrarError()
+        {this.state.api.length === 0 || this.state.error ? (
+          this.listaVacia()
         ) : (
           <>
             {this.state.mostrarMensajeDeEstado && (
@@ -126,8 +159,8 @@ class SolicitudesPendientes extends Component {
               </Table.Header>
 
               <Table.Body>
-                {this.state.filasEncontradas &&
-                  this.state.filasEncontradas.map((value) => (
+                {this.state.api &&
+                  this.state.api.map((value) => (
                     <Table.Row key={value.id}>
                       <Table.Cell className="bordes-tabla">
                         <Label className="nombre">{value.nombre}</Label>
