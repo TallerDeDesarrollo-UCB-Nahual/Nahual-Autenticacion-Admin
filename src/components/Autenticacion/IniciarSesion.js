@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Header, Icon, Segment } from "semantic-ui-react";
 import Navbar from "../lista-solicitudes/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
-const IniciarSesion = (props) => {
+const IniciarSesion = () => {
   const { loginWithRedirect: iniciarSesion } = useAuth0();
 	return (
 		<>
@@ -12,7 +12,7 @@ const IniciarSesion = (props) => {
 					<Icon name="hand point down outline" />
 					¡Bienvenido!
 					<Header.Subheader>
-						Para continuar debe iniciar sesion.
+						Para continuar debe iniciar sesión.
 					</Header.Subheader>
 				</Header>
 				<Button
@@ -20,7 +20,7 @@ const IniciarSesion = (props) => {
 					style={{ marginTop: "30px", backgroundColor: "#87D734" }}
           onClick={()=>iniciarSesion()}
 				>
-					Iniciar Sesion
+					Iniciar Sesión
 					<Icon name="right arrow" />
 				</Button>
 			</Segment>
