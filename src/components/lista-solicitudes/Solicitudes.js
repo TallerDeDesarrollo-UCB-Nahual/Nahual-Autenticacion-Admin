@@ -6,12 +6,12 @@ import SolicitudesPendientes from "./SolicitudesPendientes";
 
 export const Solicitudes = () => {
   const [
-    estaCargandoSolicitudesPendientes,
-    setEstaCargandoSolicitudesPendientes
+    cargandoSolicitudesPendientes,
+    modificarCargandoSolicitudesPendientes
   ] = useState(true);
   const [
-    estaCargandoSolicitudesAprobadas,
-    setEstaCargandoSolicitudesAprobadas
+    cargandoSolicitudesAprobadas,
+    modificarCargandoSolicitudesAprobadas
   ] = useState(true);
   const pestañas = [
     {
@@ -21,10 +21,10 @@ export const Solicitudes = () => {
         content: "Solicitudes pendientes"
       },
       render: () => (
-        <Tab.Pane loading={estaCargandoSolicitudesPendientes}>
+        <Tab.Pane loading={cargandoSolicitudesPendientes}>
           <SolicitudesPendientes
             mostrarCargando={(cargando) =>
-              setEstaCargandoSolicitudesPendientes(cargando)
+              modificarCargandoSolicitudesPendientes(cargando)
             }
           />
         </Tab.Pane>
@@ -37,10 +37,10 @@ export const Solicitudes = () => {
         content: "Solicitudes Aprobadas"
       },
       render: () => (
-        <Tab.Pane loading={estaCargandoSolicitudesAprobadas}>
+        <Tab.Pane loading={cargandoSolicitudesAprobadas}>
           <SolicitudesAprobadas
             mostrarCargando={(cargando) =>
-              setEstaCargandoSolicitudesAprobadas(cargando)
+              modificarCargandoSolicitudesAprobadas(cargando)
             }
           />
         </Tab.Pane>
