@@ -9,7 +9,7 @@ class FormAcceso extends Component {
     this.state = {
       nombre: "",
       correo: "",
-      aplicaciones: [],
+      aplicacion: "",
       exito: null
     }
   }
@@ -19,14 +19,11 @@ class FormAcceso extends Component {
   }
 
   enConfirmacion = (evento) => {
-    var length = this.state.aplicaciones.length;
-    for (var i = 0; i < length; i++)
-    {
       evento.preventDefault();
       var estadoDepurado = {
         nombre: this.state.nombre,
         email: this.state.correo,
-        aplicacion: this.state.aplicaciones[i]
+        aplicacion: this.state.aplicacion
     }
     axios({
       method: "post",
@@ -34,12 +31,11 @@ class FormAcceso extends Component {
       headers: { "Content-Type": "application/json" },
       data: estadoDepurado
     })
-      /*.then(response => this.props.añadirAcceso(estadoDepurado))*/
+      .then(response => this.props.añadirAcceso(estadoDepurado))
       .catch(error => {
         this.setState({ errorMessage: error.message });
         console.error('Hubo un error!', error);
       });
-    }
   }
 
   render() {
@@ -73,14 +69,14 @@ class FormAcceso extends Component {
           width={16}
           onChange={this.cambioEnInput}
         />
-        <p><b>Aplicaciones</b></p>
+        <p><b>Aplicación</b></p>
         <Dropdown
           compact
-          name='aplicaciones'
-          placeholder='Aplicaciones'
+          name='aplicacion'
+          placeholder='Aplicacion'
           validators={['required']}
           fluid
-          multiple selection
+          selection
           options={opcionesAplicacion}
           onChange={this.cambioEnInput}
         />
