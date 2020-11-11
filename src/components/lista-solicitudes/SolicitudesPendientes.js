@@ -8,8 +8,7 @@ class SolicitudesPendientes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      api: [],
-      filasEncontradas: Array(0),
+      solicitudes: [],
       mensajeDeEstado: "",
       mostrarMensajeDeEstado: false,
       abierto: false,
@@ -67,7 +66,7 @@ class SolicitudesPendientes extends Component {
           method: "DELETE"
         }).then((respuesta) => {
           this.setState({
-            api: this.state.api.filter((solicitud) => solicitud.id !== valor.id)
+            api: this.state.solicitudes.filter((solicitud) => solicitud.id !== valor.id)
           });
           this.mostrarMensaje();
           this.setState({ estaCargando: false });
@@ -103,7 +102,7 @@ class SolicitudesPendientes extends Component {
   render() {
     return (
       <div>
-        {this.state.api.length === 0 || this.state.error ? (
+        {this.state.solicitudes.length === 0 || this.state.error ? (
           this.listaVacia()
         ) : (
           <>
@@ -133,8 +132,8 @@ class SolicitudesPendientes extends Component {
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                {this.state.api &&
-                  this.state.api.map((value) => (
+                {this.state.solicitudes &&
+                  this.state.solicitudes.map((value) => (
                     <Table.Row key={value.id}>
                       <Table.Cell className="bordes-tabla">
                         <Label className="nombre">{value.nombre}</Label>
