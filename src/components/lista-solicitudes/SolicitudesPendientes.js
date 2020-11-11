@@ -11,7 +11,6 @@ class SolicitudesPendientes extends Component {
       solicitudes: [],
       mensajeDeEstado: "",
       mostrarMensajeDeEstado: false,
-      abierto: false,
       estaCargando: false,
       error: ""
     };
@@ -26,7 +25,7 @@ class SolicitudesPendientes extends Component {
       .then((respuesta) => {
         respuesta.data &&
           this.setState({
-            api: respuesta.data
+            solicitudes: respuesta.data
           });
         this.props.mostrarCargando(false);
       })
@@ -66,7 +65,7 @@ class SolicitudesPendientes extends Component {
           method: "DELETE"
         }).then((respuesta) => {
           this.setState({
-            api: this.state.solicitudes.filter((solicitud) => solicitud.id !== valor.id)
+            solicitudes: this.state.solicitudes.filter((solicitud) => solicitud.id !== valor.id)
           });
           this.mostrarMensaje();
           this.setState({ estaCargando: false });
@@ -158,14 +157,6 @@ class SolicitudesPendientes extends Component {
                     </Table.Row>
                   ))}
               </Table.Body>
-              <Table.Footer>
-                <Table.Row>
-                  <Table.HeaderCell
-                    colSpan="4"
-                    className="no-border"
-                  ></Table.HeaderCell>
-                </Table.Row>
-              </Table.Footer>
             </Table>
           </>
         )}
