@@ -19,11 +19,14 @@ class FormAcceso extends Component {
   }
 
   enConfirmacion = (evento) => {
-    evento.preventDefault();
-    var estadoDepurado = {
-      nombre: this.state.nombre,
-      email: this.state.correo,
-      aplicacion: this.state.aplicaciones[0]
+    var length = this.state.aplicaciones.length;
+    for (var i = 0; i < length; i++)
+    {
+      evento.preventDefault();
+      var estadoDepurado = {
+        nombre: this.state.nombre,
+        email: this.state.correo,
+        aplicacion: this.state.aplicaciones[i]
     }
     axios({
       method: "post",
@@ -31,11 +34,12 @@ class FormAcceso extends Component {
       headers: { "Content-Type": "application/json" },
       data: estadoDepurado
     })
-      .then(response => this.props.añadirAcceso(estadoDepurado))
+      /*.then(response => this.props.añadirAcceso(estadoDepurado))*/
       .catch(error => {
         this.setState({ errorMessage: error.message });
-        console.error('There was an error!', error);
+        console.error('Hubo un error!', error);
       });
+    }
   }
 
   render() {
