@@ -33,7 +33,6 @@ const ValidarAutorizacion = () => {
 			}
 		)
 			.then((respuesta) => {
-				console.log(respuesta.data);
 				setState({
 					validado: respuesta.data.data,
 					mostrarIconoCargando: false
@@ -50,7 +49,7 @@ const ValidarAutorizacion = () => {
 	function iconoDeCarga() {
 		return (
 			state.mostrarIconoCargando === true && (
-				<Dimmer active>
+				<Dimmer active inverted>
 					<Loader>Verificando Acceso...</Loader>
 				</Dimmer>
 			)
