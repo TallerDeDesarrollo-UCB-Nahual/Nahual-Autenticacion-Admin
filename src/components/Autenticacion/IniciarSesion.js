@@ -3,7 +3,7 @@ import { Button, Header, Icon, Segment } from "semantic-ui-react";
 import Navbar from "../lista-solicitudes/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 const IniciarSesion = () => {
-  const { loginWithRedirect: iniciarSesion } = useAuth0();
+	const { loginWithRedirect: iniciarSesion } = useAuth0();
 	return (
 		<>
 			<Navbar />
@@ -18,7 +18,7 @@ const IniciarSesion = () => {
 				<Button
 					size="big"
 					style={{ marginTop: "30px", backgroundColor: "#87D734" }}
-          onClick={()=>iniciarSesion()}
+					onClick={() => iniciarSesion()}
 				>
 					Iniciar Sesión
 					<Icon name="right arrow" />

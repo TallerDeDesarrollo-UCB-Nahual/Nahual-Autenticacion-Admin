@@ -9,8 +9,8 @@ import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
 	<Auth0Provider
-		domain="dev-gl-221m2.us.auth0.com"
-		clientId="u0vos7IYdq3wkqMjAI3pQ6YeuWr3RNHL"
+		domain="dev-0563c-jv.us.auth0.com"
+		clientId="jp5aAELVtvO4bhLSEjf3P4TR5XCPbYXC"
 		useRefreshTokens={true}
 		cacheLocation="localstorage"
 	>
