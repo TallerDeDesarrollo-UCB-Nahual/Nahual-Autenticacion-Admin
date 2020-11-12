@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Confirm, Icon, Image, Label } from "semantic-ui-react";
+import { Confirm, Icon, Label } from "semantic-ui-react";
 
 export const PermisoEtiqueta = ({ permiso, solicitud, quitarPermiso, asignarError }) => {
   const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
@@ -42,8 +42,7 @@ export const PermisoEtiqueta = ({ permiso, solicitud, quitarPermiso, asignarErro
   };
   const cancelar = () => cambiarConfirmacionAbierta(false);
   return (
-    <Label style={{ padding: "10px" }} basic color={permiso.color} image>
-      <Image src={permiso.icono} />
+    <Label style={{ padding: "10px" }} basic color={permiso.color} >
       {permiso.aplicacion}
       <Icon name="delete" onClick={() => cambiarConfirmacionAbierta(true)} />
       <Confirm
