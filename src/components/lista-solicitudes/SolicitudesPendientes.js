@@ -51,12 +51,15 @@ class SolicitudesPendientes extends Component {
 
   otorgarAcceso = async (valor) => {
     this.setState({ estaCargando: true });
-    const requestOptions = {
+    const opcionesDeSolicitud = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(valor)
     };
-    fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}otorgarAcceso`, requestOptions)
+    fetch(
+      `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}otorgarAcceso`,
+      opcionesDeSolicitud
+    )
       .then((respuesta) => {
         return respuesta.json();
       })
@@ -65,7 +68,9 @@ class SolicitudesPendientes extends Component {
           method: "DELETE"
         }).then((respuesta) => {
           this.setState({
-            solicitudes: this.state.solicitudes.filter((solicitud) => solicitud.id !== valor.id)
+            solicitudes: this.state.solicitudes.filter(
+              (solicitud) => solicitud.id !== valor.id
+            )
           });
           this.mostrarMensaje();
           this.setState({ estaCargando: false });
@@ -79,7 +84,8 @@ class SolicitudesPendientes extends Component {
           error: "Problema al obtener los datos."
         });
         this.setState({ estaCargando: false });
-        this.props.mostrarCargando(false);      });
+        this.props.mostrarCargando(false);
+      });
   };
 
   listaVacia() {
@@ -132,24 +138,24 @@ class SolicitudesPendientes extends Component {
               </Table.Header>
               <Table.Body>
                 {this.state.solicitudes &&
-                  this.state.solicitudes.map((value) => (
-                    <Table.Row key={value.id}>
+                  this.state.solicitudes.map((solicitud) => (
+                    <Table.Row key={solicitud.id}>
                       <Table.Cell className="bordes-tabla">
-                        <Label className="nombre">{value.nombre}</Label>
+                        <Label className="nombre">{solicitud.nombre}</Label>
                         <br></br>
-                        <Label className="email">{value.email}</Label>
+                        <Label className="email">{solicitud.email}</Label>
                       </Table.Cell>
                       <Table.Cell className="bordes-tabla">
-                        <div> {value.razon}</div>
+                        <div> {solicitud.razon}</div>
                       </Table.Cell>
                       <Table.Cell className="bordes-tabla">
-                        <div> {value.aplicacion}</div>
+                        <div> {solicitud.aplicacion}</div>
                       </Table.Cell>
                       <Table.Cell className="bordes-tabla">
                         <Button
                           disabled={this.state.estaCargando}
                           positive
-                          onClick={() => this.otorgarAcceso(value)}
+                          onClick={() => this.otorgarAcceso(solicitud)}
                         >
                           Otorgar Acceso
                         </Button>
