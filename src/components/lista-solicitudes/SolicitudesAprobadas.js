@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Label, Message, Table } from "semantic-ui-react";
 import "../../public/Stylesheets/Table.css";
-import iconoAdmin from "../../assets/iconoAdmin.svg";
-import iconoEmpresa from "../../assets/iconoEmpresa.svg";
-import iconoNahual from "../../assets/iconoNahual.svg";
 import { PermisoEtiqueta } from "./PermisoEtiqueta";
 
 const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
@@ -78,17 +75,15 @@ export class SolicitudesAprobadas extends Component {
     solicitud.permisoNahual &&
       permisos.push({
         aplicacion: "Nahual",
-        color: "green",
-        icono: iconoNahual
+        color: "green"
       });
     solicitud.permisoEmpresas &&
       permisos.push({
         aplicacion: "Empresas",
-        color: "grey",
-        icono: iconoEmpresa
+        color: "grey"
       });
     solicitud.permisoAdmin &&
-      permisos.push({ aplicacion: "Admin", color: "blue", icono: iconoAdmin });
+      permisos.push({ aplicacion: "Admin", color: "blue" });
     return permisos.map((permiso) => (
       <PermisoEtiqueta
         asignarError={this.asignarError}
