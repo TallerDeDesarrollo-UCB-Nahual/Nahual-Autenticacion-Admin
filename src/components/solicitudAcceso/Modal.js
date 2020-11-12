@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Header } from 'semantic-ui-react';
+import { Modal } from 'semantic-ui-react';
 import FormularioDeSolicitud from './FormularioDeSolicitud';
 
 class ModalExample extends Component {
