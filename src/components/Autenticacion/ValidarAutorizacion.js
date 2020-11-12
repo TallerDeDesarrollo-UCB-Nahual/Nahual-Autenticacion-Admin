@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Dimmer, Loader } from "semantic-ui-react";
 import Axios from "axios";
-import NahualTable from "../lista-solicitudes/Tabla";
+import Solicitudes from "../lista-solicitudes/Solicitudes";
 import NoAutorizado from "./NoAutorizado.js";
 
 const ValidarAutorizacion = () => {
@@ -59,7 +59,7 @@ const ValidarAutorizacion = () => {
 	return (
 		<div>
 			{iconoDeCarga()}
-			{estado.validado ? <NahualTable /> : <NoAutorizado />}
+			{estado.validado ? <Solicitudes /> : <NoAutorizado />}
 		</div>
 	);
 };

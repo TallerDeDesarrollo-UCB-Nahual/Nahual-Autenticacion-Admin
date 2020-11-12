@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Label, Button, Message, Table } from "semantic-ui-react";
-import "../../public/stylesheets/Table.css";
+import "../../public/Stylesheets/Table.css";
 import Navbar from "./Navbar";
 
 class Nahual_Table extends Component {

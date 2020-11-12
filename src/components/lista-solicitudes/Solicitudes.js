@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import SolicitudesAprobadas from "./SolicitudesAprobadas";
 import SolicitudesPendientes from "./SolicitudesPendientes";
 
-export const Solicitudes = () => {
+const Solicitudes = () => {
   const [
     cargandoSolicitudesPendientes,
     modificarCargandoSolicitudesPendientes
@@ -50,9 +50,10 @@ export const Solicitudes = () => {
   return (
     <>
       <Navbar />
-      <Container>
+      <Container style={{ marginTop: 120 }}>
         <Tab panes={pestañas} />
       </Container>
     </>
   );
 };
+export default Solicitudes;
