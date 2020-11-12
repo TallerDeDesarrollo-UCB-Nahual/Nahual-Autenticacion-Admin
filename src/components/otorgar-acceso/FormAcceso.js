@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Dropdown } from 'semantic-ui-react'
+import { Button, Dropdown, Dimmer, Loader } from 'semantic-ui-react'
 import { Form, Input } from 'semantic-ui-react-form-validator'
 import axios  from 'axios';
-import MensajeResultante from '../solicitudAcceso/tipo-mensaje/MensajeResultante'
+import MensajeAcceso from './mensaje-acceso/MensajeAcceso'
 
 class FormAcceso extends Component {
   constructor(props) {
@@ -11,12 +11,23 @@ class FormAcceso extends Component {
       nombre: "",
       correo: "",
       aplicacion: "",
-      exito: null
+      exito: null,
+      mostrarBotonDeCarga: false
     }
   }
 
   cambioEnInput = (e, { value, name }) => {
     this.setState({ [name]: value })
+  }
+
+  iconoDeCarga() {
+    return (
+      this.state.mostrarBotonDeCarga === true && (
+        <Dimmer active inverted>
+          <Loader inverted>Cargando</Loader>
+        </Dimmer>
+      )
+    );
   }
 
   enConfirmacion = (evento) => {
@@ -26,6 +37,7 @@ class FormAcceso extends Component {
         email: this.state.correo,
         aplicacion: this.state.aplicacion
     }
+    this.setState({mostrarBotonDeCarga:true});
     axios({
       method: "post",
       url: 'http://localhost:3001/otorgarAcceso',
@@ -34,12 +46,17 @@ class FormAcceso extends Component {
     })
       .then(respuesta => {
         this.setState({exito:true});
-        setTimeout(() => { this.props.cerrarModal();}, 2000);
+        this.setState({mostrarBotonDeCarga:false});
+        setTimeout(() => { 
+          this.props.cerrarModal();
+        }, 2500);
       })
       .catch(error => {
-        this.setState({ errorMessage: error.message });
-        console.error('Hubo un error!', error);
-        this.setState({exito:false})
+        this.setState({exito:false});
+        this.setState({mostrarBotonDeCarga:false});
+        setTimeout(() => { 
+          this.props.cerrarModal();
+        }, 2500);
       });
   }
 
@@ -51,6 +68,7 @@ class FormAcceso extends Component {
     ]
     return (
       <div>
+         {this.iconoDeCarga()}
          <Form id="myForm" onSubmit={this.enConfirmacion}>
           <Input
             name='nombre'
@@ -91,9 +109,9 @@ class FormAcceso extends Component {
           <Button floated='right' type='submit' onSubmit={this.enConfirmacion}>Otorgar Acceso</Button>
         </Form>
         {(this.state.exito === true) && (
-        <MensajeResultante encabezadoDelMensaje= "Solicitud exitosa" cuerpoDelMensaje="Acceso otorgado con exito" colorDeFondo="green"/>)}
+        <MensajeAcceso encabezadoDelMensaje= "Solicitud exitosa" cuerpoDelMensaje="Acceso otorgado con exito" colorDeFondo="green"/>)}
         {(this.state.exito === false) && (
-        <MensajeResultante encabezadoDelMensaje= "Solicitud no exitosa" cuerpoDelMensaje="Hubo un error al momento de enviar, intente de nuevo más tarde" colorDeFondo="red"/>)}
+        <MensajeAcceso encabezadoDelMensaje= "Solicitud no exitosa" cuerpoDelMensaje="Hubo un error al momento de enviar, intente de nuevo más tarde" colorDeFondo="red"/>)}
       </div>
      
     )
