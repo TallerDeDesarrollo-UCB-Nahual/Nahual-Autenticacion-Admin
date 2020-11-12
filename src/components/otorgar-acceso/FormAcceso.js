@@ -32,7 +32,10 @@ class FormAcceso extends Component {
       headers: { "Content-Type": "application/json" },
       data: estadoDepurado
     })
-      .then(response => this.props.añadirAcceso(estadoDepurado))
+      .then(respuesta => {
+        this.setState({exito:true});
+        setTimeout(() => { this.props.cerrarModal();}, 2000);
+      })
       .catch(error => {
         this.setState({ errorMessage: error.message });
         console.error('Hubo un error!', error);
