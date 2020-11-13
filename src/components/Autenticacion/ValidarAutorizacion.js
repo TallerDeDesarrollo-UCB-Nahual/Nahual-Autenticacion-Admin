@@ -12,12 +12,12 @@ const ValidarAutorizacion = () => {
 		mostrarIconoCargando: true
 	});
 	useEffect(() => {
-		verificarAutotizacion();
+		verificarAutorizacion();
 		// eslint-disable-next-line
 	}, []);
-	const verificarAutotizacion = () => {
+	const verificarAutorizacion = () => {
 		const SERVICIO_DE_VERIFICACION_API_SERVICIO_DE_DATOS =
-			process.env.REACT_APP_API_ACCESO_URL;
+			process.env.REACT_APP_SOLICITAR_ACCESO_URL;
 		const datos = JSON.stringify({
 			nombre: usuario.name,
 			email: usuario.email,
@@ -25,7 +25,7 @@ const ValidarAutorizacion = () => {
 		});
 
 		Axios.post(
-			`${SERVICIO_DE_VERIFICACION_API_SERVICIO_DE_DATOS}/verificarAcceso`,
+			`${SERVICIO_DE_VERIFICACION_API_SERVICIO_DE_DATOS}verificarAcceso`,
 			datos,
 			{
 				headers: {
