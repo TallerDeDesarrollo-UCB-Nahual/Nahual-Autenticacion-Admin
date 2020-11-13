@@ -15,16 +15,14 @@ export const PermisoEtiqueta = ({ permiso, solicitud, quitarPermiso, asignarErro
     axios
       .post(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}revocarAcceso`, contenido)
       .then((respuesta) =>{
-        console.log(respuesta);
-        cuandoSerevoqueAcceso(permiso.aplicacion,respuesta.data.data)})
+        cuandoSeRevoqueAcceso(permiso.aplicacion,respuesta.data.data)})
       .catch((error) => {
         asignarError(error.message)
       });
-
     cambiarConfirmacionAbierta(false);
   };
 
-  const cuandoSerevoqueAcceso = (aplicacion, solicitud) => {
+  const cuandoSeRevoqueAcceso = (aplicacion, solicitud) => {
     switch (aplicacion) {
       case "Nahual":
         solicitud.permisoNahual = false;
