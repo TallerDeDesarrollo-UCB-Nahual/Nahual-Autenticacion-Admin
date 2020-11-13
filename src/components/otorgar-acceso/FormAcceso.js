@@ -4,8 +4,8 @@ import { Form, Input } from 'semantic-ui-react-form-validator'
 import axios  from 'axios';
 import MensajeAcceso from './mensaje-acceso/MensajeAcceso'
 
-/*const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
-  process.env.REACT_APP_SOLICITAR_ACCESO_URL;*/
+const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
+  process.env.REACT_APP_SOLICITAR_ACCESO_URL;
 class FormAcceso extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +42,7 @@ class FormAcceso extends Component {
     this.setState({mostrarBotonDeCarga:true});
     axios({
       method: "post",
-      url: 'http://localhost:3001/otorgarAcceso',
+      url: `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}otorgarAcceso`,
       headers: { "Content-Type": "application/json" },
       data: estadoDepurado
     })
