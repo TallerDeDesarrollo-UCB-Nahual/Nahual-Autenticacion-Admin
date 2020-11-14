@@ -3,6 +3,7 @@ import { Container, Tab } from "semantic-ui-react";
 import Navbar from "./Navbar";
 import SolicitudesAprobadas from "./SolicitudesAprobadas";
 import SolicitudesPendientes from "./SolicitudesPendientes";
+import SolicitudesRechazadas from "./SolicitudesRechazadas";
 
 export const Solicitudes = () => {
   const [
@@ -13,6 +14,11 @@ export const Solicitudes = () => {
     cargandoSolicitudesAprobadas,
     modificarCargandoSolicitudesAprobadas
   ] = useState(true);
+  const [
+    cargandoSolicitudesRechazadas,
+    modificarCargandoSolicitudesRechazadas
+  ] = useState(true);
+
   const pestañas = [
     {
       menuItem: {
@@ -41,6 +47,22 @@ export const Solicitudes = () => {
           <SolicitudesAprobadas
             mostrarCargando={(cargando) =>
               modificarCargandoSolicitudesAprobadas(cargando)
+            }
+          />
+        </Tab.Pane>
+      )
+    },
+    {
+      menuItem:{
+        key: "solicitudesRechazadas",
+        icon: "times circle",
+        content: "Solicitudes Rechazadas"
+      },
+      render: () => (
+        <Tab.Pane loading={cargandoSolicitudesRechazadas}>
+          <SolicitudesRechazadas
+            mostrarCargando={(cargando) =>
+              modificarCargandoSolicitudesRechazadas(cargando)
             }
           />
         </Tab.Pane>

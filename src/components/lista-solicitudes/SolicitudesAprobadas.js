@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Label, Message, Table } from "semantic-ui-react";
-import "../../public/Stylesheets/Table.css";
+import "../../public/stylesheets/Table.css";
 const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
   process.env.REACT_APP_SOLICITAR_ACCESO_URL;
 export class SolicitudesAprobadas extends Component {
