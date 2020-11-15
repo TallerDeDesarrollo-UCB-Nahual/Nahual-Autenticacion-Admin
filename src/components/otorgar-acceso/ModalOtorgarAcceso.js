@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal } from 'semantic-ui-react'
 import CuerpoModal from './CuerpoModal'
 
-class ModalAcceso extends Component {
+class ModalOtorgarAcceso extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,4 +32,4 @@ class ModalAcceso extends Component {
   }
 }
 
-export default ModalAcceso;
+export default ModalOtorgarAcceso;

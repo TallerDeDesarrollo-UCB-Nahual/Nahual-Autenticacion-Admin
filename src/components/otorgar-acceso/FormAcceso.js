@@ -18,7 +18,7 @@ class FormAcceso extends Component {
     }
   }
 
-  cambioEnInput = (e, { value, name }) => {
+  cambioEnEntrada = (e, { value, name }) => {
     this.setState({ [name]: value })
   }
 
@@ -32,9 +32,9 @@ class FormAcceso extends Component {
     );
   }
 
-  enConfirmacion = (evento) => {
+  otorgarAcceso = (evento) => {
       evento.preventDefault();
-      var estadoDepurado = {
+      var nuevoUsuario = {
         nombre: this.state.nombre,
         email: this.state.correo,
         aplicacion: this.state.aplicacion
@@ -44,7 +44,7 @@ class FormAcceso extends Component {
       method: "post",
       url: `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}otorgarAcceso`,
       headers: { "Content-Type": "application/json" },
-      data: estadoDepurado
+      data: nuevoUsuario
     })
       .then(respuesta => {
         this.setState({exito:true});
@@ -71,7 +71,7 @@ class FormAcceso extends Component {
     return (
       <div>
          {this.iconoDeCarga()}
-         <Form id="myForm" onSubmit={this.enConfirmacion}>
+         <Form id="myForm" onSubmit={this.otorgarAcceso}>
           <Input
             name='nombre'
             value={this.state.nombre}
@@ -81,7 +81,7 @@ class FormAcceso extends Component {
             label='Nombre completo'
             placeholder='Nombre completo'
             width={16}
-            onChange={this.cambioEnInput}
+            onChange={this.cambioEnEntrada}
           />
           <Input
             name='correo'
@@ -93,7 +93,7 @@ class FormAcceso extends Component {
             validators={['required']}
             errorMessages={['Este campo es requerido']}
             width={16}
-            onChange={this.cambioEnInput}
+            onChange={this.cambioEnEntrada}
           />
           <p><b>Aplicación</b></p>
           <Dropdown
@@ -104,11 +104,13 @@ class FormAcceso extends Component {
             fluid
             selection
             options={opcionesAplicacion}
-            onChange={this.cambioEnInput}
+            onChange={this.cambioEnEntrada}
           />
           <br></br>
+          <br></br>
+          <br></br>
           <Button floated='right' color='red' onClick={this.props.cerrarModal}>Cancelar</Button>
-          <Button floated='right' type='submit' onSubmit={this.enConfirmacion}>Otorgar Acceso</Button>
+          <Button floated='right' type='submit' onSubmit={this.otorgarAcceso}>Otorgar Acceso</Button>
         </Form>
         {(this.state.exito === true) && (
         <MensajeAcceso encabezadoDelMensaje= "Solicitud exitosa" cuerpoDelMensaje="Acceso otorgado con exito" colorDeFondo="green"/>)}
