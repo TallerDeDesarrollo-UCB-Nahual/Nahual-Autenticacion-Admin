@@ -13,7 +13,7 @@ export class SolicitudesAprobadas extends Component {
     this.props.mostrarCargando(true);
   }
   obtenerSolicitudes() {
-    fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}usuariosConAcceso`)
+    fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}api/usuariosConAcceso`)
       .then((respuesta) => {
         return respuesta.json();
       })

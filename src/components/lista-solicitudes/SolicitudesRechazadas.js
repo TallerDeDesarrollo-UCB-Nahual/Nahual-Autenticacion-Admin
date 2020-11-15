@@ -16,7 +16,7 @@ class SolicitudesRechazadas extends Component {
     }
 
     obtenerSolicitudes() {
-        fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}usuariosRechazados`)
+        fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}api/usuariosRechazados`)
           .then((respuesta) => {
             return respuesta.json();
           })
@@ -59,6 +59,22 @@ class SolicitudesRechazadas extends Component {
         );
     }
 
+    eliminarSolicitud=async(value)=>{
+      this.setState({isLoading:true})
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(value)
+      };
+      try {
+        var res = await fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}api/usuariosRechazados/${value.id}`,{method:'DELETE'})
+      } catch (error) {
+        console.log(error);
+      }
+      this.setState({isLoading:false})
+      this.componentDidMount()
+    }
+
     componentDidMount() {
         this.obtenerSolicitudes();
     }
@@ -93,10 +109,10 @@ class SolicitudesRechazadas extends Component {
                             <br></br>
                           </Table.Cell>
                           <Table.Cell className="bordes-tabla">
-                            <Label className="email">{solicitud.email}</Label>
+                            <Label className="email">{solicitud.correo}</Label>
                           </Table.Cell>
                           <Table.Cell className="bordes-tabla">
-                            <Label className="motivo">{solicitud.motivo}</Label>
+                            <Button disabled={this.state.isLoading} negative onClick={()=>this.eliminarSolicitud(solicitud)}>Eliminar Solicitud</Button>
                           </Table.Cell>
                         </Table.Row>
                       ))}
