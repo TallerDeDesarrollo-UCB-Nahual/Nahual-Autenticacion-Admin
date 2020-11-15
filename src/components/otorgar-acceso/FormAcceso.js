@@ -90,8 +90,8 @@ class FormAcceso extends Component {
             id='form-input-control-error-email'
             label='Correo'
             placeholder='ejemplo@****.com'
-            validators={['required']}
-            errorMessages={['Este campo es requerido']}
+            validators={['required', 'matchRegexp:.+@.+.+']}
+            errorMessages={['Este campo es requerido','Formato incorrecto, ingrese un correo valido']}
             width={16}
             onChange={this.cambioEnEntrada}
           />
