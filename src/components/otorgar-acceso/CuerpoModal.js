@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, Image } from 'semantic-ui-react'
+import {Modal, Image } from 'semantic-ui-react'
 import LogoNahual from '../../public/imagenes/logo-proyecto-nahual.webp'
 import FormAcceso from "./FormAcceso"
 
