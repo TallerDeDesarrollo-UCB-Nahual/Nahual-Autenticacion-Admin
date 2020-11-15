@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import ModalOtorgarAcceso from '../otorgar-acceso/ModalOtorgarAcceso'
 import SolicitudesAprobadas from "./SolicitudesAprobadas";
 import SolicitudesPendientes from "./SolicitudesPendientes";
+import '../solicitudAcceso/style.css'
 
 const Solicitudes = () => {
   const [
@@ -51,7 +52,7 @@ const Solicitudes = () => {
   return (
     <>
       <Navbar />
-      <ModalOtorgarAcceso/>
+      <ModalOtorgarAcceso class='AccesoCorreo'/>
       <br></br>
       <Container style={{ marginTop: 120 }}>
         <Tab panes={pestañas} />
