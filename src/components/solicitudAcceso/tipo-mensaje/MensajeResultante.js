@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Message} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import '../../../public/Stylesheets/Mensaje.css';
+import '../../../public/stylesheets/Mensaje.css';
 
 
 class MensajeResultante extends Component {
