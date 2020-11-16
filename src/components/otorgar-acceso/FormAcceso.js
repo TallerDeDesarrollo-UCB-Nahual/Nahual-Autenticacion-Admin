@@ -107,8 +107,8 @@ class FormAcceso extends Component {
             onChange={this.cambioEnEntrada}
           />
           <br/><br/><br/>
-          <Button floated='right' type='submit' onSubmit={this.otorgarAcceso}>Otorgar acceso</Button>
-          <Button floated='right' color='red' onClick={this.props.cerrarModal}>Cancelar</Button>
+          <Button floated='right' color='green' type='submit' onSubmit={this.otorgarAcceso}>Otorgar acceso</Button>
+          <Button floated='right'  onClick={this.props.cerrarModal}>Cancelar</Button>
         </Form>
         {(this.state.exito === true) && (
         <MensajeAcceso encabezadoDelMensaje= "Solicitud exitosa" cuerpoDelMensaje="Acceso otorgado con exito" colorDeFondo="green"/>)}
