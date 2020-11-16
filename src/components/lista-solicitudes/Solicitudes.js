@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import ModalOtorgarAcceso from '../otorgar-acceso/ModalOtorgarAcceso'
 import SolicitudesAprobadas from "./SolicitudesAprobadas";
 import SolicitudesPendientes from "./SolicitudesPendientes";
-import '../solicitudAcceso/style.css'
+import '../../public/Stylesheets/Table.css'
 
 const Solicitudes = () => {
   const [
