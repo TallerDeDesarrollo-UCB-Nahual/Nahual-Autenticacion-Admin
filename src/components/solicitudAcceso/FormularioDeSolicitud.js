@@ -60,6 +60,12 @@ export default class FormularioDeSolicitud extends Component {
         this.state[e.target.name] = valor;
     }
 
+    enCancelacion = (evento) =>{
+        evento.preventDefault();
+        this.setState({ exito: null }); 
+        window.location.replace(this.state.redirigirA);
+    }
+
     enConfirmacion = (evento) => {
         evento.preventDefault();
         var estadoDepurado = { 
@@ -122,7 +128,9 @@ export default class FormularioDeSolicitud extends Component {
                         value = {this.state.motivo}
                         onChange={this.onChangeInput}
                     />
-                    <Button type='submit' className="boton_confirm" onSubmit={this.enConfirmacion}>Confirmar</Button>
+                    <Button positive type='submit' className="boton_confirm" onSubmit={this.enConfirmacion}>Confirmar</Button>
+                    <Button negative floated="right" onClick={this.enCancelacion} CausesValidation="false">Cancelar</Button>
+            
                 </Form>
                 {(this.state.exito === true) && (
                 <MensajeResultante encabezadoDelMensaje= "Solicitud exitosa" cuerpoDelMensaje="Espere por favor hasta que se apruebe su solicitud, volverá a la página anterior" colorDeFondo="green"/>)}
