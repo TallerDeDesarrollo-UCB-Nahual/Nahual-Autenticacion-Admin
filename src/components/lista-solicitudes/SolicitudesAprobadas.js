@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Button, Label, Message, Table } from "semantic-ui-react";
+import { Label, Message, Table } from "semantic-ui-react";
 import "../../public/Stylesheets/Table.css";
+import { PermisoEtiqueta } from "./PermisoEtiqueta";
+
 const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
   process.env.REACT_APP_SOLICITAR_ACCESO_URL;
 export class SolicitudesAprobadas extends Component {
@@ -11,6 +13,8 @@ export class SolicitudesAprobadas extends Component {
       error: ""
     };
     this.props.mostrarCargando(true);
+    this.quitarPermiso = this.quitarPermiso.bind(this);
+    this.asignarError = this.asignarError.bind(this);
   }
   obtenerSolicitudes() {
     fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}usuariosConAcceso`)
@@ -23,13 +27,20 @@ export class SolicitudesAprobadas extends Component {
         });
         this.props.mostrarCargando(false);
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({
           error: "Problema al obtener los datos."
         });
         this.props.mostrarCargando(false);
       });
   }
+
+  asignarError(error) {
+    this.setState({
+      error: error
+    });
+  }
+
   mostrarError() {
     return (
       <Message negative>
@@ -59,10 +70,47 @@ export class SolicitudesAprobadas extends Component {
     this.obtenerSolicitudes();
   }
 
+  mostrarPermisos(solicitud) {
+    var permisos = [];
+    solicitud.permisoNahual &&
+      permisos.push({
+        aplicacion: "Nahual",
+        color: "green"
+      });
+    solicitud.permisoEmpresas &&
+      permisos.push({
+        aplicacion: "Empresas",
+        color: "grey"
+      });
+    solicitud.permisoAdmin &&
+      permisos.push({
+        aplicacion: "Admin",
+        color: "blue"
+      });
+    return permisos.map((permiso) => (
+      <PermisoEtiqueta
+        asignarError={this.asignarError}
+        key={permiso.aplicacion}
+        solicitud={solicitud}
+        permiso={permiso}
+        quitarPermiso={this.quitarPermiso}
+      />
+    ));
+  }
+
+  quitarPermiso(solicitudNueva) {
+    const nuevaListaDeSolicitudes = this.state.solicitudes;
+    const solicitudIndex = this.state.solicitudes.findIndex(
+      (solicitud) => solicitud.email === solicitudNueva.email
+    );
+    nuevaListaDeSolicitudes[solicitudIndex] = solicitudNueva;
+    this.setState({ solicitudes: nuevaListaDeSolicitudes });
+  }
+
   render() {
     return (
       <div>
-        {this.state.solicitudes.length === 0 ? (
+        {this.state.solicitudes.length === 0 || this.state.error ? (
           this.listaVacia()
         ) : (
           <div>
@@ -76,23 +124,22 @@ export class SolicitudesAprobadas extends Component {
                     Correo
                   </Table.HeaderCell>
                   <Table.HeaderCell className="cabeceras-tabla">
-                    Acción
+                    Permisos
                   </Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
                 {this.state.solicitudes &&
-                  this.state.solicitudes.map((solicitud, indice) => (
-                    <Table.Row key={indice}>
+                  this.state.solicitudes.map((solicitud) => (
+                    <Table.Row key={solicitud.email}>
                       <Table.Cell className="bordes-tabla">
                         <Label className="nombre">{solicitud.nombre}</Label>
-                        <br></br>
                       </Table.Cell>
                       <Table.Cell className="bordes-tabla">
                         <Label className="email">{solicitud.email}</Label>
                       </Table.Cell>
                       <Table.Cell className="bordes-tabla">
-                        <Button positive>Revocar Acceso</Button>
+                        {this.mostrarPermisos(solicitud)}
                       </Table.Cell>
                     </Table.Row>
                   ))}
