@@ -50,7 +50,7 @@ export const PermisoEtiqueta = ({ permiso, solicitud, quitarPermiso, asignarErro
         onCancel={cancelar}
         onConfirm={confirmar}
         cancelButton="Cancelar"
-        confirmButton="Quitar"
+        confirmButton="Quitar acceso"
         size="tiny"
       />
     </Label>
