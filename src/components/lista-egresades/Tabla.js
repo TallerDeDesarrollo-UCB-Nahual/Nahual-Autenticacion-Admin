@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Label, Button, Message, Table, Search } from 'semantic-ui-react'
-import '../../public/stylesheets/Table.css';
+import '../../public/Stylesheets/Table.css';
 
 class Nahual_Table extends Component {
   constructor() {

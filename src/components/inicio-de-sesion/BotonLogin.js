@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withAuth0 } from "@auth0/auth0-react";
 import { Icon, Button } from 'semantic-ui-react';
-import '../../public/stylesheets/Navbar.css';
+import '../../public/Stylesheets/Navbar.css';
 
 class BotonLogin extends Component {
   render() {
