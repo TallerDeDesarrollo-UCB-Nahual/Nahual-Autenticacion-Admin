@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import '../../../public/stylesheets/Mensaje.css';
 
 
-export class MensajeResultante extends Component {
+class MensajeResultante extends Component {
     render() {
         var colorDeMensaje = this.props.colorDeFondo;
         return (
@@ -21,9 +21,8 @@ export class MensajeResultante extends Component {
     }
 }
 
-
 MensajeResultante.propTypes = {
-    todo: PropTypes.object.isRequired
-}
+  todo: PropTypes.object.isRequired
+};
 
-export default MensajeResultante
+export default MensajeResultante;
