@@ -63,10 +63,10 @@ class SolicitudesPendientes extends Component {
       .then((respuesta) => {
         return respuesta.json();
       })
-      .then((respuesta) => {
+      .then(() => {
         fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes/${valor.id}`, {
           method: "DELETE"
-        }).then((respuesta) => {
+        }).then(() => {
           this.setState({
             solicitudes: this.state.solicitudes.filter(
               (solicitud) => solicitud.id !== valor.id
@@ -79,7 +79,7 @@ class SolicitudesPendientes extends Component {
           });
         });
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({
           error: "Problema al obtener los datos."
         });

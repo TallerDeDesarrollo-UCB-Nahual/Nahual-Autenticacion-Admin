@@ -72,7 +72,7 @@ const Solicitudes = () => {
   return (
     <>
       <Navbar />
-      <Container style={{ marginTop: 120 }}>
+      <Container style={{ marginTop: 120, marginBottom: "20px" }}>
         <Tab panes={pestañas} />
       </Container>
     </>

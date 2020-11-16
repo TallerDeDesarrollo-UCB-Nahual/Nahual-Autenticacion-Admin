@@ -27,7 +27,7 @@ export class SolicitudesAprobadas extends Component {
         });
         this.props.mostrarCargando(false);
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({
           error: "Problema al obtener los datos."
         });
