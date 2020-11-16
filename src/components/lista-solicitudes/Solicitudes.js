@@ -72,9 +72,9 @@ const Solicitudes = () => {
   ];
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <ModalOtorgarAcceso/>
-      <br></br>
+      <br/>
       <Container style={{ marginTop: 120 }}>
         <Tab panes={pestañas} />
       </Container>
