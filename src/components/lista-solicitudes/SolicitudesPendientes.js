@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Label, Button, Message, Table } from "semantic-ui-react";
-import "../../public/stylesheets/Table.css";
+import "../../public/Stylesheets/Table.css";
 
 const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
   process.env.REACT_APP_SOLICITAR_ACCESO_URL;
@@ -18,7 +18,7 @@ class SolicitudesPendientes extends Component {
   }
 
   obtenerSolicitudes() {
-    fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}api/solicitudes`)
+    fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes`)
       .then((respuesta) => {
         return respuesta.json();
       })
@@ -96,7 +96,7 @@ class SolicitudesPendientes extends Component {
       body: JSON.stringify(value)
     };
     try {
-      var res = await fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}api/solicitudes/${value.id}`,{method:'DELETE'})
+      var res = await fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}/solicitudes/${value.id}`,{method:'DELETE'})
     } catch (error) {
       console.log(error);
     }

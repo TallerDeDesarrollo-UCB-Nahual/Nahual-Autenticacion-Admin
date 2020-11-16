@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import logo from '../../public/imagenes/logo.png';
-import '../../public/stylesheets/Navbar.css';
 import React from "react";
+import logo from "../../public/imagenes/logo-proyecto-nahual.webp";
+import "../../public/Stylesheets/Navbar.css";
 import { Menu, Image, Dropdown } from "semantic-ui-react";
 import { useAuth0 } from "@auth0/auth0-react";
 
