@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Tab } from "semantic-ui-react";
 import Navbar from "./Navbar";
+import ModalOtorgarAcceso from '../otorgar-acceso/ModalOtorgarAcceso'
 import SolicitudesAprobadas from "./SolicitudesAprobadas";
 import SolicitudesPendientes from "./SolicitudesPendientes";
 import SolicitudesRechazadas from "./SolicitudesRechazadas";
@@ -71,8 +72,9 @@ const Solicitudes = () => {
   ];
   return (
     <>
-      <Navbar />
-      <Container style={{ marginTop: 120, marginBottom: "20px" }}>
+      <Navbar/>
+      <ModalOtorgarAcceso/>
+      <Container style={{ marginTop: 120 }}>
         <Tab panes={pestañas} />
       </Container>
     </>
