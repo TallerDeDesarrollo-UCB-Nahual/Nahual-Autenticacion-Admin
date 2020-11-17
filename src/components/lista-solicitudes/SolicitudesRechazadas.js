@@ -16,7 +16,7 @@ class SolicitudesRechazadas extends Component {
     }
 
     obtenerSolicitudes() {
-        fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}api/usuariosRechazados`)
+        fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}usuariosRechazados`)
           .then((respuesta) => {
             return respuesta.json();
           })
@@ -54,7 +54,7 @@ class SolicitudesRechazadas extends Component {
             <Message
             icon="warning sign"
             warning
-            header={"No hay solicitudes aprobadas."}
+            header={"No hay solicitudes rechazadas."}
             />
         );
     }
@@ -67,7 +67,7 @@ class SolicitudesRechazadas extends Component {
         body: JSON.stringify(value)
       };
       try {
-        var res = await fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}api/usuariosRechazados/${value.id}`,{method:'DELETE'})
+        var res = await fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}usuariosRechazados/${value.id}`,{method:'DELETE'})
       } catch (error) {
         console.log(error);
       }

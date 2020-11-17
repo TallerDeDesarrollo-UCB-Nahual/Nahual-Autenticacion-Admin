@@ -6,7 +6,9 @@ import CryptoJS from 'crypto-js';
 import axios  from 'axios';
 import MensajeResultante from './tipo-mensaje/MensajeResultante.js';
 
-const rutaSolicitudes = 'https://nahual-authentication-api.herokuapp.com/api/solicitudes';
+const SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL =
+  process.env.REACT_APP_SOLICITAR_ACCESO_URL;
+const rutaSolicitudes = `${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes`;
 
 function prepararEstadoAPartirDe(desencriptado){
     return ({
