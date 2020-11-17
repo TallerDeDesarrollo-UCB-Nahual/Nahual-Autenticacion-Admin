@@ -24,7 +24,7 @@ class ModalOtorgarAcceso extends Component {
         onOpen={() => this.mostrarModal (true)}
         size="small"
         closeIcon
-        trigger={<Button className='AccesoCorreo'  color = 'green' floated='right'  onClick={() => (this.mostrarModal(true))} style={{ marginTop: 100 }}>Otorgar acceso directo</Button>}
+        trigger={<Button className='AccesoCorreo'  color = 'green' floated='right'  onClick={() => (this.mostrarModal(true))}>Otorgar acceso directo</Button>}
       >
         <CuerpoModal cerrarModal={() => (this.mostrarModal (false))}></CuerpoModal> 
       </Modal>

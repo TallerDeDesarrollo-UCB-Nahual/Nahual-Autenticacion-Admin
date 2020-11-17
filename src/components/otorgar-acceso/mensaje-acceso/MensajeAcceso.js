@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Message} from 'semantic-ui-react';
 import '../../../public/Stylesheets/Mensaje.css';
 
-
 export class MensajeAcceso extends Component {
     render() {
         var colorDeMensaje = this.props.colorDeFondo;

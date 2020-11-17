@@ -63,10 +63,10 @@ class SolicitudesPendientes extends Component {
       .then((respuesta) => {
         return respuesta.json();
       })
-      .then((respuesta) => {
+      .then(() => {
         fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}solicitudes/${valor.id}`, {
           method: "DELETE"
-        }).then((respuesta) => {
+        }).then(() => {
           this.setState({
             solicitudes: this.state.solicitudes.filter(
               (solicitud) => solicitud.id !== valor.id
@@ -79,7 +79,7 @@ class SolicitudesPendientes extends Component {
           });
         });
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({
           error: "Problema al obtener los datos."
         });
@@ -87,6 +87,22 @@ class SolicitudesPendientes extends Component {
         this.props.mostrarCargando(false);
       });
   };
+
+  rechazarAcceso=async(value)=>{
+    this.setState({isLoading:true})
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(value)
+    };
+    try {
+      var res = await fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}/solicitudes/${value.id}`,{method:'DELETE'})
+    } catch (error) {
+      console.log(error);
+    }
+    this.setState({isLoading:false})
+    this.componentDidMount()
+  }
 
   listaVacia() {
     return this.state.error ? (
@@ -159,6 +175,7 @@ class SolicitudesPendientes extends Component {
                         >
                           Otorgar Acceso
                         </Button>
+                        <Button disabled={this.state.isLoading} negative onClick={()=>this.rechazarAcceso(solicitud)}>Rechazar Solicitud</Button>
                       </Table.Cell>
                     </Table.Row>
                   ))}

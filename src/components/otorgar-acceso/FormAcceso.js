@@ -96,7 +96,7 @@ class FormAcceso extends Component {
             onChange={this.cambioEnEntrada}
           />
           <p><b>Aplicación</b></p>
-          <Dropdown
+          <Dropdown style={{ marginTop: 25 }}
             compact
             name='aplicacion'
             placeholder='Aplicacion'
@@ -105,10 +105,9 @@ class FormAcceso extends Component {
             selection
             options={opcionesAplicacion}
             onChange={this.cambioEnEntrada}
-          />
-          <br/><br/><br/>
-          <Button floated='right' color='green' type='submit' onSubmit={this.otorgarAcceso}>Otorgar acceso</Button>
-          <Button floated='right'  onClick={this.props.cerrarModal}>Cancelar</Button>
+            />
+          <Button floated='right' color='green' type='submit' onSubmit={this.otorgarAcceso} style={{ marginTop: 70 }}>Otorgar acceso</Button>
+          <Button floated='right'  onClick={this.props.cerrarModal} style={{ marginTop: 70 }}>Cancelar</Button>
         </Form>
         {(this.state.exito === true) && (
         <MensajeAcceso encabezadoDelMensaje= "Solicitud exitosa" cuerpoDelMensaje="Acceso otorgado con exito" colorDeFondo="green"/>)}
