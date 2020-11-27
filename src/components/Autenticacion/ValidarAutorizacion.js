@@ -23,7 +23,6 @@ const ValidarAutorizacion = () => {
 			email: usuario.email,
 			aplicacion: "Admin"
 		});
-
 		Axios.post(
 			`${SERVICIO_DE_VERIFICACION_API_SERVICIO_DE_DATOS}verificarAcceso`,
 			datos,

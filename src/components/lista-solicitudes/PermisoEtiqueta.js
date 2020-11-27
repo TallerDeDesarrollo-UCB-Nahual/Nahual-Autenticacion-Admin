@@ -24,8 +24,8 @@ export const PermisoEtiqueta = ({ permiso, solicitud, quitarPermiso, asignarErro
 
   const cuandoSeRevoqueAcceso = (aplicacion, solicitud) => {
     switch (aplicacion) {
-      case "Nahual":
-        solicitud.permisoNahual = false;
+      case "Egresades":
+        solicitud.permisoEgresades = false;
         break;
       case "Empresas":
         solicitud.permisoEmpresas = false;
