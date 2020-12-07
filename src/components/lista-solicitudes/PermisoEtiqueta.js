@@ -33,6 +33,9 @@ export const PermisoEtiqueta = ({ permiso, solicitud, quitarPermiso, asignarErro
       case "Admin":
         solicitud.permisoAdmin = false;
         break;
+      case "Cursos-Periodos":
+        solicitud.permisoCursosPeriodos = false;
+        break;
       default:
         break;
     }

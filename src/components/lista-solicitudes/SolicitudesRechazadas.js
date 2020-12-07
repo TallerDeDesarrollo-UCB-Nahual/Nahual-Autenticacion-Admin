@@ -96,7 +96,7 @@ class SolicitudesRechazadas extends Component {
                         Correo
                       </Table.HeaderCell>
                       <Table.HeaderCell className="cabeceras-tabla">
-                        Motivo
+                        Acción
                       </Table.HeaderCell>
                     </Table.Row>
                   </Table.Header>
