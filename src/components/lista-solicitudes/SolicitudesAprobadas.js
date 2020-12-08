@@ -87,6 +87,11 @@ export class SolicitudesAprobadas extends Component {
         aplicacion: "Admin",
         color: "blue"
       });
+    solicitud.permisoCursosPeriodos &&
+      permisos.push({
+        aplicacion: "Cursos-Periodos",
+        color: "yellow"
+      });
     return permisos.map((permiso) => (
       <PermisoEtiqueta
         asignarError={this.asignarError}
