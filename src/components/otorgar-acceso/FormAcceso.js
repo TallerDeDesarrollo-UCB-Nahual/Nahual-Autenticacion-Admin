@@ -76,8 +76,8 @@ class FormAcceso extends Component {
           <Input
             name='nombre'
             value={this.state.nombre}
-            validators={['required', 'matchRegexp:^[A-Za-z ]+$']}
-            errorMessages={['Este campo es requerido', 'El campo no acepta valores numéricos']}
+            validators={['required']}
+            errorMessages={['Este campo es requerido']}
             id='form-acceso'
             label='Nombre completo'
             placeholder='Nombre completo'
