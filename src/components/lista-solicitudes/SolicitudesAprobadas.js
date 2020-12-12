@@ -72,9 +72,9 @@ export class SolicitudesAprobadas extends Component {
 
   mostrarPermisos(solicitud) {
     var permisos = [];
-    solicitud.permisoNahual &&
+    solicitud.permisoEgresades &&
       permisos.push({
-        aplicacion: "Nahual",
+        aplicacion: "Egresades",
         color: "green"
       });
     solicitud.permisoEmpresas &&
@@ -86,6 +86,11 @@ export class SolicitudesAprobadas extends Component {
       permisos.push({
         aplicacion: "Admin",
         color: "blue"
+      });
+    solicitud.permisoCursosPeriodos &&
+      permisos.push({
+        aplicacion: "Cursos-Periodos",
+        color: "yellow"
       });
     return permisos.map((permiso) => (
       <PermisoEtiqueta

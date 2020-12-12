@@ -65,8 +65,9 @@ class FormAcceso extends Component {
   render() {
     const opcionesAplicacion = [
       { key: 'Admin', text: 'Admin', value: 'Admin' },
-      { key: 'Nahual', text: 'Nahual', value: 'Nahual' },
+      { key: 'Egresades', text: 'Egresades', value: 'Egresades' },
       { key: 'Empresas', text: 'Empresas', value: 'Empresas' },
+      { key: 'Cursos-Periodos', text: 'Cursos y Periodos', value: 'Cursos-Periodos' },
     ]
     return (
       <div>
