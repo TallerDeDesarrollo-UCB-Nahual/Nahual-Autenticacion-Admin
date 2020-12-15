@@ -96,7 +96,7 @@ class SolicitudesPendientes extends Component {
       body: JSON.stringify(value)
     };
     try {
-      var res = await fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}/solicitudes/${value.id}`,{method:'DELETE'})
+      var res = await fetch(`${SERVICIO_DE_SOLICITAR_ACCESO_NAHUAL}/solicitudes/rechazar/${value.id}`,{method:'DELETE'})
     } catch (error) {
       console.log(error);
     }
