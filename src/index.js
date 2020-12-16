@@ -11,6 +11,7 @@ ReactDOM.render(
 	<Auth0Provider
 		domain="dev-0563c-jv.us.auth0.com"
 		clientId="jp5aAELVtvO4bhLSEjf3P4TR5XCPbYXC"
+		redirectUri={window.location.origin+"/panel-administrador"}
 		useRefreshTokens={true}
 		cacheLocation="localstorage"
 	>

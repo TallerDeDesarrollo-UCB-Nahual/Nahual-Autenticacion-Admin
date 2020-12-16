@@ -34,7 +34,7 @@ function Navbar() {
 									}
 								]}
 								pointing="top left"
-								onChange={() => cerrarSesion()}
+								onChange={() => cerrarSesion({ returnTo: window.location.origin+"/panel-administrador"})}
 							/>
 						</Menu.Item>
 					</>
