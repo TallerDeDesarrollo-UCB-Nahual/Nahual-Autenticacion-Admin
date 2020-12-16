@@ -95,8 +95,8 @@ export default class FormularioDeSolicitud extends Component {
                     <Form id="myForm" className="ui form" onSubmit={this.enConfirmacion}>
                     <Input 
                         name = "nombre" 
-                        validators={['required','matchRegexp:^[A-Za-z ]+$']} 
-                        errorMessages={['Este campo es requerido', 'El campo no acepta valores numéricos']} 
+                        validators={['required']} 
+                        errorMessages={['Este campo es requerido']} 
                         value = {this.state.nombre}
                         id='form-input-control-first-name'
                         label='Nombre completo'
