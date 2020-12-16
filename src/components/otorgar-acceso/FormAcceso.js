@@ -76,8 +76,6 @@ class FormAcceso extends Component {
           <Input
             name='nombre'
             value={this.state.nombre}
-            validators={['required']}
-            errorMessages={['Este campo es requerido']}
             id='form-acceso'
             label='Nombre completo'
             placeholder='Nombre completo'
