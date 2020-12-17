@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 # Documentacion de Nahual-Autenticacion-Admin
-Link: https://docs.google.com/document/d/1YGlY6g5U-zrWJKxN1iwvZiw3dbbdVKnWjGUj8V4CxDs/edit?usp=sharing
+Link: https://docs.google.com/document/d/1GW-y-MUti2QwJ8a05_RrmOZxk2ukfi6UyOj5sf7b6tU/edit?usp=sharing
 
 # Comandos
 
