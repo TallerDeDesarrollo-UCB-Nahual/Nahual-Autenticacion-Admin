@@ -22,8 +22,13 @@ export class SolicitudesAprobadas extends Component {
         return respuesta.json();
       })
       .then((respuesta) => {
+        const data = respuesta.data
+          .filter(item => item.permisoEmpresas || 
+                          item.permisoEgresades || 
+                          item.permisoAdmin || 
+                          item.permisoCursosPeriodos)
         this.setState({
-          solicitudes: respuesta.data
+          solicitudes: data
         });
         this.props.mostrarCargando(false);
       })
